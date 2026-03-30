@@ -71,27 +71,18 @@ class Notifier:
             return
 
         try:
-            import aiohttp
-            import asyncio
+            import requests
 
-            async def _post():
-                async with aiohttp.ClientSession() as session:
-                    payload = {"content": message[:2000]}
-                    async with session.post(
-                        self.config.discord_webhook_url,
-                        json=payload,
-                    ) as resp:
-                        if resp.status != 204:
-                            logger.error(
-                                f"Discord送信エラー: {resp.status}"
-                            )
-
-            # 既存のイベントループがあれば使う、なければ新規作成
-            try:
-                loop = asyncio.get_running_loop()
-                loop.create_task(_post())
-            except RuntimeError:
-                asyncio.run(_post())
+            payload = {"content": message[:2000]}
+            resp = requests.post(
+                self.config.discord_webhook_url,
+                json=payload,
+                timeout=5
+            )
+            
+            if resp.status_code not in (200, 204):
+                logger.error(f"Discord送信エラー: {resp.status_code} {resp.text}")
+                self._send_console(message)
 
         except Exception as e:
             logger.error(f"Discord送信エラー: {e}")

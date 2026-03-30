@@ -54,10 +54,12 @@ print("✅ Bitget認証成功！")
 print()
 print("=== Gemini API テスト ===")
 try:
-    import google.generativeai as genai
-    genai.configure(api_key=os.getenv("GEMINI_API_KEY", ""))
-    model = genai.GenerativeModel("gemini-2.0-flash")
-    resp = model.generate_content("Say OK in one word")
+    from google import genai
+    client = genai.Client(api_key=os.getenv("GEMINI_API_KEY", ""))
+    resp = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents="Say OK in one word"
+    )
     print("Gemini応答: {}".format(resp.text.strip()))
     print("✅ Gemini API接続成功！")
 except Exception as e:

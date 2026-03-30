@@ -87,7 +87,7 @@ class RuleEngine:
 
         logger.info(
             f"RuleEngine: ポジション設定 "
-            f"{side.upper()} {size} ETH @ {entry_price} "
+            f"{side.upper()} {size} @ {entry_price} "
             f"ルール数={len(exit_rules)}"
         )
 

@@ -171,7 +171,9 @@ class BitgetClient:
         symbol = symbol or self.trading_config.symbol
         order_type = 'limit' if price else 'market'
 
-        params = {}
+        params = {
+            'tradeSide': 'open',  # 片方向モード: 新規エントリー
+        }
         if stop_loss:
             params['stopLoss'] = stop_loss
         if take_profit:
@@ -200,33 +202,50 @@ class BitgetClient:
             logger.error(f"発注エラー: {e}")
             raise
 
-    def close_position(self, symbol: Optional[str] = None) -> Optional[dict]:
+    def close_position(self, symbol: Optional[str] = None,
+                        fallback_side: Optional[str] = None,
+                        fallback_size: Optional[float] = None) -> Optional[dict]:
         """
         現在のポジションを決済
+        fallback_side/fallback_size: get_positionsが空の場合に使用
         Returns: order dict or None
         """
         symbol = symbol or self.trading_config.symbol
         positions = self.get_positions(symbol)
 
-        if not positions:
+        if positions:
+            pos = positions[0]
+            close_side = 'sell' if pos['side'] == 'long' else 'buy'
+            amount = pos['size']
+            pnl_info = pos.get('unrealized_pnl', 'N/A')
+        elif fallback_side and fallback_size:
+            # API経由でポジション取得できない場合、内部状態から決済
+            close_side = 'sell' if fallback_side == 'long' else 'buy'
+            amount = fallback_size
+            pnl_info = 'N/A (fallback)'
+            logger.warning(
+                f"get_positionsが空のためフォールバック使用: "
+                f"{fallback_side} {fallback_size}"
+            )
+        else:
             logger.info("決済対象のポジションなし")
             return None
-
-        pos = positions[0]
-        close_side = 'sell' if pos['side'] == 'long' else 'buy'
 
         try:
             order = self.exchange.create_order(
                 symbol=symbol,
                 type='market',
                 side=close_side,
-                amount=pos['size'],
-                params={'reduceOnly': True},
+                amount=amount,
+                params={
+                    'tradeSide': 'close',  # 片方向モード: 決済
+                    'reduceOnly': True,
+                },
             )
 
             logger.info(
-                f"ポジション決済: {pos['side']} {pos['size']} @ 市場価格 "
-                f"PnL={pos['unrealized_pnl']}"
+                f"ポジション決済: {close_side} {amount} @ 市場価格 "
+                f"PnL={pnl_info}"
             )
             return order
 

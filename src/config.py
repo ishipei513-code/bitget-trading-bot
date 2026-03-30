@@ -25,7 +25,7 @@ class BitgetConfig:
 class GeminiConfig:
     """Gemini API設定"""
     api_key: str = ""
-    model: str = "gemini-2.0-flash"
+    model: str = "gemini-2.5-flash"
     temperature: float = 0.1  # 低い温度で一貫性のある判断
 
 
@@ -94,7 +94,7 @@ def load_config() -> AppConfig:
 
         gemini=GeminiConfig(
             api_key=os.getenv("GEMINI_API_KEY", ""),
-            model=os.getenv("GEMINI_MODEL", "gemini-2.0-flash"),
+            model=os.getenv("GEMINI_MODEL", "gemini-2.5-flash"),
         ),
 
         trading=TradingConfig(

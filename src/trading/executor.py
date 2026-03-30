@@ -34,6 +34,11 @@ class Executor:
         self.dry_run = dry_run
         self._order_count = 0
 
+    @property
+    def coin_name(self) -> str:
+        """取引通貨名を取得 (例: BNB/USDT:USDT → BNB)"""
+        return self.config.symbol.split('/')[0]
+
     def execute_entry(self, decision: TradingDecision,
                       current_price: float,
                       balance: dict) -> bool:
@@ -66,7 +71,7 @@ class Executor:
             # ドライラン: ログのみ
             logger.info(
                 f"📝 [DRY RUN] エントリー注文: "
-                f"{side.upper()} {size} ETH @ {current_price} "
+                f"{side.upper()} {size} {self.coin_name} @ {current_price} "
                 f"SL={decision.stop_loss_price} "
                 f"TP={decision.take_profit_price} "
                 f"Confidence={decision.confidence:.2f}"
@@ -126,8 +131,8 @@ class Executor:
         # 通知
         mode = "[DRY RUN] " if self.dry_run else ""
         self.notifier.send_entry(
-            f"{mode}📈 {position_side.upper()} エントリー\n"
-            f"サイズ: {size} ETH @ {current_price}\n"
+            f"{mode}📈 {position_side.upper()} エントリー ({self.coin_name})\n"
+            f"サイズ: {size} {self.coin_name} @ {current_price}\n"
             f"SL: {decision.stop_loss_price} | TP: {decision.take_profit_price}\n"
             f"Confidence: {decision.confidence:.2f}\n"
             f"理由: {decision.rationale}"
@@ -169,22 +174,30 @@ class Executor:
         if self.dry_run:
             logger.info(
                 f"📝 [DRY RUN] 決済: "
-                f"{side.upper()} {size} ETH "
+                f"{side.upper()} {size} {self.coin_name} "
                 f"@ {exit_price} "
                 f"PnL={pnl:+.2f} USDT "
                 f"理由: {reason}"
             )
         else:
             try:
-                order = self.client.close_position()
+                order = self.client.close_position(
+                    fallback_side=side,
+                    fallback_size=size,
+                )
                 if order:
                     logger.info(f"✅ 決済注文成功: ID={order.get('id')}")
                 else:
-                    logger.warning("決済対象なし（取引所側）")
+                    logger.warning("決済対象なし（取引所側） - ポジションをクリアします")
             except Exception as e:
                 logger.error(f"❌ 決済注文失敗: {e}")
-                self.notifier.send_error(f"決済注文失敗: {e}")
-                return False
+                # "No position to close" の場合、Bitget側で既に決済済み
+                # RuleEngineとStateをクリアして無限ループを防止
+                if "No position to close" in str(e) or "22002" in str(e):
+                    logger.warning("取引所側でポジション既に決済済み - 内部状態をクリアします")
+                else:
+                    self.notifier.send_error(f"決済注文失敗: {e}")
+                    return False
 
         # リスク管理に結果を記録
         self.risk_manager.record_trade_result(pnl)
@@ -214,7 +227,7 @@ class Executor:
         emoji = "💰" if pnl >= 0 else "💸"
         self.notifier.send_exit(
             f"{mode}{emoji} {side.upper()} 決済\n"
-            f"サイズ: {size} ETH\n"
+            f"サイズ: {size} {self.coin_name}\n"
             f"エントリー: {entry_price} → エグジット: {exit_price}\n"
             f"PnL: {pnl:+.2f} USDT\n"
             f"理由: {reason}"
