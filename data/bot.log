@@ -225,3 +225,192 @@
 2026-03-30 15:43:37,164 [INFO] src.analysis.data_collector: データ収集完了: Price=615.76 RSI=46.4 Structure=BEARISH Events=0
 2026-03-30 15:43:37,164 [INFO] __main__: サイクル完了: 0.47秒 | AI呼出=2 | 注文=0 | ガードレール={'total': 2, 'passed': 2, 'blocked': 0, 'block_rate': 0.0}
 2026-03-30 15:44:10,245 [INFO] __main__: シャットダウン開始...
+2026-03-30 15:45:37,782 [INFO] src.state.state_manager: 状態ファイル読み込み: data\state.json
+2026-03-30 15:45:37,782 [INFO] __main__: ============================================================
+2026-03-30 15:45:37,782 [INFO] __main__: Bitget AI Trading Bot 起動
+2026-03-30 15:45:37,782 [INFO] __main__: モード: LIVE
+2026-03-30 15:45:37,782 [INFO] __main__: シンボル: BNB/USDT:USDT
+2026-03-30 15:45:37,782 [INFO] __main__: レバレッジ: 5x
+2026-03-30 15:45:37,782 [INFO] __main__: 初期資金: 15.0 USDT
+2026-03-30 15:45:37,782 [INFO] __main__: 1Rリスク: 5.0%
+2026-03-30 15:45:37,782 [INFO] __main__: ============================================================
+2026-03-30 15:45:39,215 [INFO] src.exchange.bitget_client: レバレッジ設定: 5x (BNB/USDT:USDT)
+2026-03-30 15:45:39,215 [INFO] src.exchange.bitget_client: Bitget接続初期化完了
+2026-03-30 15:45:40,396 [INFO] src.ai.gemini_client: Gemini API初期化完了: model=gemini-2.5-flash
+2026-03-30 15:45:40,860 [INFO] __main__: メインループ開始
+2026-03-30 15:45:40,860 [INFO] __main__: --- サイクル #1 ---
+2026-03-30 15:45:41,411 [INFO] src.analysis.data_collector: データ収集完了: Price=615.78 RSI=47.1 Structure=RANGING Events=0
+2026-03-30 15:45:41,412 [INFO] src.ai.trigger_evaluator: AI呼び出し決定 - 保険ポーリング: NORMAL相場 (600秒間隔)
+2026-03-30 15:45:41,412 [INFO] src.ai.gemini_client: Gemini API呼び出し #1 (試行1/3)
+2026-03-30 15:45:41,412 [INFO] google_genai.models: AFC is enabled with max remote calls: 10.
+2026-03-30 15:45:49,719 [INFO] httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-03-30 15:45:49,719 [INFO] src.ai.gemini_client: Gemini判断: action=HOLD confidence=0.72 size=0.0 SL=0.0 TP=0.0
+2026-03-30 15:45:49,719 [INFO] __main__: サイクル完了: 8.86秒 | AI呼出=1 | 注文=0 | ガードレール={'total': 1, 'passed': 1, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 15:45:50,180 [INFO] src.exchange.websocket_client: WebSocket接続成功: wss://ws.bitget.com/v2/ws/public
+2026-03-30 15:45:50,180 [INFO] src.exchange.websocket_client: チャネル購読: ticker/USDT-FUTURES/BNBUSDT
+2026-03-30 15:45:50,276 [INFO] src.exchange.websocket_client: 購読確認: {'event': 'subscribe', 'arg': {'instType': 'USDT-FUTURES', 'channel': 'ticker', 'instId': 'BNBUSDT'}}
+2026-03-30 15:46:40,875 [INFO] __main__: --- サイクル #2 ---
+2026-03-30 15:46:41,075 [INFO] src.analysis.technical: イベント検出: ['MA_DEAD_CROSS']
+2026-03-30 15:46:41,317 [INFO] src.analysis.data_collector: データ収集完了: Price=615.79 RSI=44.8 Structure=BEARISH Events=1
+2026-03-30 15:46:41,317 [INFO] src.ai.trigger_evaluator: AI呼び出し決定 - イベントトリガー: MA_DEAD_CROSS
+2026-03-30 15:46:41,318 [INFO] src.ai.gemini_client: Gemini API呼び出し #2 (試行1/3)
+2026-03-30 15:46:41,319 [INFO] google_genai.models: AFC is enabled with max remote calls: 10.
+2026-03-30 15:46:51,320 [INFO] httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-03-30 15:46:51,321 [INFO] src.ai.gemini_client: Gemini判断: action=HOLD confidence=0.66 size=0.0 SL=0.0 TP=0.0
+2026-03-30 15:46:51,322 [INFO] __main__: サイクル完了: 10.45秒 | AI呼出=2 | 注文=0 | ガードレール={'total': 2, 'passed': 2, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 15:47:40,877 [INFO] __main__: --- サイクル #3 ---
+2026-03-30 15:47:41,136 [INFO] src.analysis.technical: イベント検出: ['MA_GOLDEN_CROSS', 'RSI_SPIKE_55']
+2026-03-30 15:47:41,427 [INFO] src.analysis.data_collector: データ収集完了: Price=616.09 RSI=55.2 Structure=RANGING Events=2
+2026-03-30 15:47:41,427 [INFO] src.ai.trigger_evaluator: AI呼び出し決定 - イベントトリガー: MA_GOLDEN_CROSS, RSI_SPIKE_55
+2026-03-30 15:47:41,427 [INFO] src.ai.gemini_client: Gemini API呼び出し #3 (試行1/3)
+2026-03-30 15:47:41,427 [INFO] google_genai.models: AFC is enabled with max remote calls: 10.
+2026-03-30 15:47:48,353 [INFO] httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-03-30 15:47:48,353 [INFO] src.ai.gemini_client: Gemini判断: action=HOLD confidence=0.66 size=0.0 SL=0.0 TP=0.0
+2026-03-30 15:47:48,353 [INFO] __main__: サイクル完了: 7.48秒 | AI呼出=3 | 注文=0 | ガードレール={'total': 3, 'passed': 3, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 15:48:40,891 [INFO] __main__: --- サイクル #4 ---
+2026-03-30 15:48:41,446 [INFO] src.analysis.data_collector: データ収集完了: Price=616.07 RSI=54.8 Structure=RANGING Events=0
+2026-03-30 15:48:41,446 [INFO] __main__: サイクル完了: 0.55秒 | AI呼出=3 | 注文=0 | ガードレール={'total': 3, 'passed': 3, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 15:49:40,894 [INFO] __main__: --- サイクル #5 ---
+2026-03-30 15:49:41,197 [INFO] src.analysis.technical: イベント検出: ['RSI_SPIKE_45']
+2026-03-30 15:49:41,454 [INFO] src.analysis.data_collector: データ収集完了: Price=615.67 RSI=44.8 Structure=RANGING Events=1
+2026-03-30 15:49:41,455 [INFO] src.ai.trigger_evaluator: AI呼び出し決定 - イベントトリガー: RSI_SPIKE_45
+2026-03-30 15:49:41,455 [INFO] src.ai.gemini_client: Gemini API呼び出し #4 (試行1/3)
+2026-03-30 15:49:41,455 [INFO] google_genai.models: AFC is enabled with max remote calls: 10.
+2026-03-30 15:49:48,253 [INFO] httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-03-30 15:49:48,253 [INFO] src.ai.gemini_client: Gemini判断: action=HOLD confidence=0.66 size=0.0 SL=0.0 TP=0.0
+2026-03-30 15:49:48,256 [INFO] __main__: サイクル完了: 7.36秒 | AI呼出=4 | 注文=0 | ガードレール={'total': 4, 'passed': 4, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 15:50:40,905 [INFO] __main__: --- サイクル #6 ---
+2026-03-30 15:50:41,341 [INFO] src.analysis.data_collector: データ収集完了: Price=615.94 RSI=48.3 Structure=RANGING Events=0
+2026-03-30 15:50:41,341 [INFO] __main__: サイクル完了: 0.44秒 | AI呼出=4 | 注文=0 | ガードレール={'total': 4, 'passed': 4, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 15:51:40,924 [INFO] __main__: --- サイクル #7 ---
+2026-03-30 15:51:41,475 [INFO] src.analysis.data_collector: データ収集完了: Price=616.06 RSI=49.8 Structure=RANGING Events=0
+2026-03-30 15:51:41,475 [INFO] __main__: サイクル完了: 0.55秒 | AI呼出=4 | 注文=0 | ガードレール={'total': 4, 'passed': 4, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 15:52:40,942 [INFO] __main__: --- サイクル #8 ---
+2026-03-30 15:52:41,411 [INFO] src.analysis.data_collector: データ収集完了: Price=615.79 RSI=47.6 Structure=RANGING Events=0
+2026-03-30 15:52:41,411 [INFO] __main__: サイクル完了: 0.47秒 | AI呼出=4 | 注文=0 | ガードレール={'total': 4, 'passed': 4, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 15:53:40,957 [INFO] __main__: --- サイクル #9 ---
+2026-03-30 15:53:41,416 [INFO] src.analysis.data_collector: データ収集完了: Price=615.68 RSI=45.5 Structure=RANGING Events=0
+2026-03-30 15:53:41,416 [INFO] __main__: サイクル完了: 0.46秒 | AI呼出=4 | 注文=0 | ガードレール={'total': 4, 'passed': 4, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 15:54:40,976 [INFO] __main__: --- サイクル #10 ---
+2026-03-30 15:54:41,131 [INFO] src.analysis.technical: イベント検出: ['MA_DEAD_CROSS']
+2026-03-30 15:54:41,429 [INFO] src.analysis.data_collector: データ収集完了: Price=615.48 RSI=42.1 Structure=BEARISH Events=1
+2026-03-30 15:54:41,429 [INFO] src.ai.trigger_evaluator: AI呼び出し決定 - イベントトリガー: MA_DEAD_CROSS
+2026-03-30 15:54:41,430 [INFO] src.ai.gemini_client: Gemini API呼び出し #5 (試行1/3)
+2026-03-30 15:54:41,430 [INFO] google_genai.models: AFC is enabled with max remote calls: 10.
+2026-03-30 15:54:53,042 [INFO] httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-03-30 15:54:53,043 [INFO] src.ai.gemini_client: Gemini判断: action=HOLD confidence=0.66 size=0.0 SL=0.0 TP=0.0
+2026-03-30 15:54:53,043 [INFO] __main__: サイクル完了: 12.07秒 | AI呼出=5 | 注文=0 | ガードレール={'total': 5, 'passed': 5, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 15:55:40,991 [INFO] __main__: --- サイクル #11 ---
+2026-03-30 15:55:41,466 [INFO] src.analysis.data_collector: データ収集完了: Price=615.68 RSI=45.9 Structure=BEARISH Events=0
+2026-03-30 15:55:41,471 [INFO] __main__: サイクル完了: 0.48秒 | AI呼出=5 | 注文=0 | ガードレール={'total': 5, 'passed': 5, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 15:56:41,005 [INFO] __main__: --- サイクル #12 ---
+2026-03-30 15:56:41,587 [INFO] src.analysis.data_collector: データ収集完了: Price=615.81 RSI=49.3 Structure=BEARISH Events=0
+2026-03-30 15:56:41,587 [INFO] __main__: サイクル完了: 0.58秒 | AI呼出=5 | 注文=0 | ガードレール={'total': 5, 'passed': 5, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 15:57:41,007 [INFO] __main__: --- サイクル #13 ---
+2026-03-30 15:57:41,591 [INFO] src.analysis.data_collector: データ収集完了: Price=615.73 RSI=47.6 Structure=BEARISH Events=0
+2026-03-30 15:57:41,592 [INFO] __main__: サイクル完了: 0.59秒 | AI呼出=5 | 注文=0 | ガードレール={'total': 5, 'passed': 5, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 15:58:41,005 [INFO] __main__: --- サイクル #14 ---
+2026-03-30 15:58:41,561 [INFO] src.analysis.data_collector: データ収集完了: Price=615.47 RSI=42.4 Structure=BEARISH Events=0
+2026-03-30 15:58:41,561 [INFO] __main__: サイクル完了: 0.56秒 | AI呼出=5 | 注文=0 | ガードレール={'total': 5, 'passed': 5, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 15:59:41,008 [INFO] __main__: --- サイクル #15 ---
+2026-03-30 15:59:41,501 [INFO] src.analysis.data_collector: データ収集完了: Price=615.74 RSI=48.2 Structure=BEARISH Events=0
+2026-03-30 15:59:41,502 [INFO] __main__: サイクル完了: 0.49秒 | AI呼出=5 | 注文=0 | ガードレール={'total': 5, 'passed': 5, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:00:41,010 [INFO] __main__: --- サイクル #16 ---
+2026-03-30 16:00:41,460 [INFO] src.analysis.data_collector: データ収集完了: Price=615.4 RSI=43.3 Structure=BEARISH Events=0
+2026-03-30 16:00:41,460 [INFO] __main__: サイクル完了: 0.45秒 | AI呼出=5 | 注文=0 | ガードレール={'total': 5, 'passed': 5, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:01:41,021 [INFO] __main__: --- サイクル #17 ---
+2026-03-30 16:01:41,471 [INFO] src.analysis.data_collector: データ収集完了: Price=615.57 RSI=45.1 Structure=BEARISH Events=0
+2026-03-30 16:01:41,472 [INFO] __main__: サイクル完了: 0.45秒 | AI呼出=5 | 注文=0 | ガードレール={'total': 5, 'passed': 5, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:02:41,029 [INFO] __main__: --- サイクル #18 ---
+2026-03-30 16:02:41,479 [INFO] src.analysis.data_collector: データ収集完了: Price=615.73 RSI=48.7 Structure=BEARISH Events=0
+2026-03-30 16:02:41,479 [INFO] __main__: サイクル完了: 0.45秒 | AI呼出=5 | 注文=0 | ガードレール={'total': 5, 'passed': 5, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:03:41,041 [INFO] __main__: --- サイクル #19 ---
+2026-03-30 16:03:41,480 [INFO] src.analysis.data_collector: データ収集完了: Price=615.82 RSI=50.8 Structure=BEARISH Events=0
+2026-03-30 16:03:41,481 [INFO] __main__: サイクル完了: 0.44秒 | AI呼出=5 | 注文=0 | ガードレール={'total': 5, 'passed': 5, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:04:41,039 [INFO] __main__: --- サイクル #20 ---
+2026-03-30 16:04:41,590 [INFO] src.analysis.data_collector: データ収集完了: Price=615.79 RSI=50.3 Structure=BEARISH Events=0
+2026-03-30 16:04:41,590 [INFO] __main__: サイクル完了: 0.55秒 | AI呼出=5 | 注文=0 | ガードレール={'total': 5, 'passed': 5, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:05:41,058 [INFO] __main__: --- サイクル #21 ---
+2026-03-30 16:05:41,203 [INFO] src.analysis.technical: イベント検出: ['MA_GOLDEN_CROSS']
+2026-03-30 16:05:41,498 [INFO] src.analysis.data_collector: データ収集完了: Price=616.16 RSI=58.2 Structure=RANGING Events=1
+2026-03-30 16:05:41,498 [INFO] src.ai.trigger_evaluator: AI呼び出し決定 - イベントトリガー: MA_GOLDEN_CROSS
+2026-03-30 16:05:41,498 [INFO] src.ai.gemini_client: Gemini API呼び出し #6 (試行1/3)
+2026-03-30 16:05:41,499 [INFO] google_genai.models: AFC is enabled with max remote calls: 10.
+2026-03-30 16:05:53,926 [INFO] httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-03-30 16:05:53,927 [INFO] src.ai.gemini_client: Gemini判断: action=HOLD confidence=0.72 size=0.0 SL=0.0 TP=0.0
+2026-03-30 16:05:53,927 [INFO] __main__: サイクル完了: 12.87秒 | AI呼出=6 | 注文=0 | ガードレール={'total': 6, 'passed': 6, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:06:41,068 [INFO] __main__: --- サイクル #22 ---
+2026-03-30 16:06:41,504 [INFO] src.analysis.data_collector: データ収集完了: Price=616.62 RSI=65.7 Structure=RANGING Events=0
+2026-03-30 16:06:41,505 [INFO] __main__: サイクル完了: 0.44秒 | AI呼出=6 | 注文=0 | ガードレール={'total': 6, 'passed': 6, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:07:41,062 [INFO] __main__: --- サイクル #23 ---
+2026-03-30 16:07:41,506 [INFO] src.analysis.data_collector: データ収集完了: Price=616.98 RSI=70.2 Structure=RANGING Events=0
+2026-03-30 16:07:41,506 [INFO] __main__: サイクル完了: 0.44秒 | AI呼出=6 | 注文=0 | ガードレール={'total': 6, 'passed': 6, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:08:41,070 [INFO] __main__: --- サイクル #24 ---
+2026-03-30 16:08:41,679 [INFO] src.analysis.data_collector: データ収集完了: Price=617.43 RSI=74.7 Structure=RANGING Events=0
+2026-03-30 16:08:41,679 [INFO] __main__: サイクル完了: 0.61秒 | AI呼出=6 | 注文=0 | ガードレール={'total': 6, 'passed': 6, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:09:41,090 [INFO] __main__: --- サイクル #25 ---
+2026-03-30 16:09:41,630 [INFO] src.analysis.data_collector: データ収集完了: Price=617.24 RSI=69.2 Structure=BULLISH Events=0
+2026-03-30 16:09:41,630 [INFO] __main__: サイクル完了: 0.54秒 | AI呼出=6 | 注文=0 | ガードレール={'total': 6, 'passed': 6, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:10:41,093 [INFO] __main__: --- サイクル #26 ---
+2026-03-30 16:10:41,572 [INFO] src.analysis.data_collector: データ収集完了: Price=617.5 RSI=71.0 Structure=BULLISH Events=0
+2026-03-30 16:10:41,572 [INFO] __main__: サイクル完了: 0.48秒 | AI呼出=6 | 注文=0 | ガードレール={'total': 6, 'passed': 6, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:11:41,101 [INFO] __main__: --- サイクル #27 ---
+2026-03-30 16:11:41,794 [INFO] src.analysis.data_collector: データ収集完了: Price=617.52 RSI=71.2 Structure=BULLISH Events=0
+2026-03-30 16:11:41,794 [INFO] __main__: サイクル完了: 0.69秒 | AI呼出=6 | 注文=0 | ガードレール={'total': 6, 'passed': 6, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:12:41,125 [INFO] __main__: --- サイクル #28 ---
+2026-03-30 16:12:41,642 [INFO] src.analysis.data_collector: データ収集完了: Price=617.07 RSI=61.7 Structure=BULLISH Events=0
+2026-03-30 16:12:41,642 [INFO] __main__: サイクル完了: 0.52秒 | AI呼出=6 | 注文=0 | ガードレール={'total': 6, 'passed': 6, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:13:41,125 [INFO] __main__: --- サイクル #29 ---
+2026-03-30 16:13:41,702 [INFO] src.analysis.data_collector: データ収集完了: Price=616.88 RSI=58.0 Structure=BULLISH Events=0
+2026-03-30 16:13:41,702 [INFO] __main__: サイクル完了: 0.58秒 | AI呼出=6 | 注文=0 | ガードレール={'total': 6, 'passed': 6, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:14:41,141 [INFO] __main__: --- サイクル #30 ---
+2026-03-30 16:14:41,592 [INFO] src.analysis.data_collector: データ収集完了: Price=616.87 RSI=57.8 Structure=BULLISH Events=0
+2026-03-30 16:14:41,592 [INFO] __main__: サイクル完了: 0.45秒 | AI呼出=6 | 注文=0 | ガードレール={'total': 6, 'passed': 6, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:15:41,141 [INFO] __main__: --- サイクル #31 ---
+2026-03-30 16:15:41,554 [INFO] src.analysis.data_collector: データ収集完了: Price=616.8 RSI=56.4 Structure=BULLISH Events=0
+2026-03-30 16:15:41,554 [INFO] __main__: サイクル完了: 0.41秒 | AI呼出=6 | 注文=0 | ガードレール={'total': 6, 'passed': 6, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:16:41,157 [INFO] __main__: --- サイクル #32 ---
+2026-03-30 16:16:41,713 [INFO] src.analysis.data_collector: データ収集完了: Price=616.92 RSI=58.3 Structure=BULLISH Events=0
+2026-03-30 16:16:41,713 [INFO] src.ai.trigger_evaluator: AI呼び出し決定 - 保険ポーリング: NORMAL相場 (600秒間隔)
+2026-03-30 16:16:41,713 [INFO] src.ai.gemini_client: Gemini API呼び出し #7 (試行1/3)
+2026-03-30 16:16:41,714 [INFO] google_genai.models: AFC is enabled with max remote calls: 10.
+2026-03-30 16:16:52,668 [INFO] httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-03-30 16:16:52,668 [INFO] src.ai.gemini_client: Gemini判断: action=HOLD confidence=0.66 size=0.0 SL=0.0 TP=0.0
+2026-03-30 16:16:52,668 [INFO] __main__: サイクル完了: 11.51秒 | AI呼出=7 | 注文=0 | ガードレール={'total': 7, 'passed': 7, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:17:41,155 [INFO] __main__: --- サイクル #33 ---
+2026-03-30 16:17:41,716 [INFO] src.analysis.data_collector: データ収集完了: Price=616.8 RSI=57.4 Structure=BULLISH Events=0
+2026-03-30 16:17:41,716 [INFO] __main__: サイクル完了: 0.56秒 | AI呼出=7 | 注文=0 | ガードレール={'total': 7, 'passed': 7, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:18:41,149 [INFO] __main__: --- サイクル #34 ---
+2026-03-30 16:18:41,566 [INFO] src.analysis.data_collector: データ収集完了: Price=616.88 RSI=57.4 Structure=BULLISH Events=0
+2026-03-30 16:18:41,566 [INFO] __main__: サイクル完了: 0.42秒 | AI呼出=7 | 注文=0 | ガードレール={'total': 7, 'passed': 7, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:19:41,150 [INFO] __main__: --- サイクル #35 ---
+2026-03-30 16:19:41,633 [INFO] src.analysis.data_collector: データ収集完了: Price=616.88 RSI=57.3 Structure=BULLISH Events=0
+2026-03-30 16:19:41,634 [INFO] __main__: サイクル完了: 0.48秒 | AI呼出=7 | 注文=0 | ガードレール={'total': 7, 'passed': 7, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:20:41,162 [INFO] __main__: --- サイクル #36 ---
+2026-03-30 16:20:41,709 [INFO] src.analysis.data_collector: データ収集完了: Price=616.51 RSI=49.0 Structure=BULLISH Events=0
+2026-03-30 16:20:41,709 [INFO] __main__: サイクル完了: 0.55秒 | AI呼出=7 | 注文=0 | ガードレール={'total': 7, 'passed': 7, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:21:41,178 [INFO] __main__: --- サイクル #37 ---
+2026-03-30 16:21:41,399 [INFO] src.analysis.technical: イベント検出: ['MA_DEAD_CROSS']
+2026-03-30 16:21:41,648 [INFO] src.analysis.data_collector: データ収集完了: Price=616.69 RSI=52.8 Structure=RANGING Events=1
+2026-03-30 16:21:41,649 [INFO] src.ai.trigger_evaluator: AI呼び出し決定 - イベントトリガー: MA_DEAD_CROSS
+2026-03-30 16:21:41,649 [INFO] src.ai.gemini_client: Gemini API呼び出し #8 (試行1/3)
+2026-03-30 16:21:41,649 [INFO] google_genai.models: AFC is enabled with max remote calls: 10.
+2026-03-30 16:21:50,073 [INFO] httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-03-30 16:21:50,074 [INFO] src.ai.gemini_client: Gemini判断: action=HOLD confidence=0.72 size=0.0 SL=0.0 TP=0.0
+2026-03-30 16:21:50,076 [INFO] __main__: サイクル完了: 8.90秒 | AI呼出=8 | 注文=0 | ガードレール={'total': 8, 'passed': 8, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:22:41,183 [INFO] __main__: --- サイクル #38 ---
+2026-03-30 16:22:41,648 [INFO] src.analysis.data_collector: データ収集完了: Price=616.68 RSI=52.3 Structure=RANGING Events=0
+2026-03-30 16:22:41,648 [INFO] __main__: サイクル完了: 0.46秒 | AI呼出=8 | 注文=0 | ガードレール={'total': 8, 'passed': 8, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:23:41,192 [INFO] __main__: --- サイクル #39 ---
+2026-03-30 16:23:42,067 [INFO] src.analysis.data_collector: データ収集完了: Price=616.2 RSI=43.1 Structure=RANGING Events=0
+2026-03-30 16:23:42,068 [INFO] __main__: サイクル完了: 0.88秒 | AI呼出=8 | 注文=0 | ガードレール={'total': 8, 'passed': 8, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:24:41,215 [INFO] __main__: --- サイクル #40 ---
+2026-03-30 16:24:41,860 [INFO] src.analysis.data_collector: データ収集完了: Price=616.13 RSI=41.9 Structure=RANGING Events=0
+2026-03-30 16:24:41,861 [INFO] __main__: サイクル完了: 0.65秒 | AI呼出=8 | 注文=0 | ガードレール={'total': 8, 'passed': 8, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:25:41,215 [INFO] __main__: --- サイクル #41 ---
+2026-03-30 16:25:41,666 [INFO] src.analysis.data_collector: データ収集完了: Price=616.17 RSI=42.6 Structure=RANGING Events=0
+2026-03-30 16:25:41,666 [INFO] __main__: サイクル完了: 0.45秒 | AI呼出=8 | 注文=0 | ガードレール={'total': 8, 'passed': 8, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:26:41,225 [INFO] __main__: --- サイクル #42 ---
+2026-03-30 16:26:41,844 [INFO] src.analysis.data_collector: データ収集完了: Price=616.06 RSI=40.6 Structure=RANGING Events=0
+2026-03-30 16:26:41,844 [INFO] __main__: サイクル完了: 0.62秒 | AI呼出=8 | 注文=0 | ガードレール={'total': 8, 'passed': 8, 'blocked': 0, 'block_rate': 0.0}
+2026-03-30 16:26:54,742 [INFO] __main__: シャットダウン開始...
