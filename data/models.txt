@@ -1,0 +1,44 @@
+﻿=== Geminiモデル一覧 ===
+
+models/gemini-2.5-flash 
+models/gemini-2.5-pro 
+models/gemini-2.0-flash 
+models/gemini-2.0-flash-001 
+models/gemini-2.0-flash-lite-001 
+models/gemini-2.0-flash-lite 
+models/gemma-3-1b-it 
+models/gemma-3-4b-it 
+models/gemma-3-12b-it 
+models/gemma-3-27b-it 
+models/gemma-3n-e4b-it 
+models/gemma-3n-e2b-it 
+models/gemini-flash-latest (安定版)
+models/gemini-flash-lite-latest (安定版)
+models/gemini-pro-latest (安定版)
+models/gemini-2.5-flash-lite 
+models/gemini-2.5-flash-image 
+models/gemini-2.5-flash-lite-preview-09-2025 (実験版)
+models/gemini-3-pro-preview (実験版)
+models/gemini-3-flash-preview (実験版)
+models/gemini-3.1-pro-preview (実験版)
+models/gemini-3.1-pro-preview-customtools (実験版)
+models/gemini-3.1-flash-lite-preview (実験版)
+models/gemini-3-pro-image-preview (実験版)
+models/nano-banana-pro-preview (実験版)
+models/gemini-3.1-flash-image-preview (実験版)
+models/lyria-3-clip-preview (実験版)
+models/lyria-3-pro-preview (実験版)
+models/gemini-robotics-er-1.5-preview (実験版)
+models/gemini-2.5-computer-use-preview-10-2025 (実験版)
+models/imagen-4.0-generate-001 
+models/imagen-4.0-ultra-generate-001 
+models/imagen-4.0-fast-generate-001 
+models/veo-2.0-generate-001 
+models/veo-3.0-generate-001 
+models/veo-3.0-fast-generate-001 
+models/veo-3.1-generate-preview (実験版)
+models/veo-3.1-fast-generate-preview (実験版)
+models/gemini-2.5-flash-native-audio-latest (安定版)
+models/gemini-2.5-flash-native-audio-preview-09-2025 (実験版)
+models/gemini-2.5-flash-native-audio-preview-12-2025 (実験版)
+models/gemini-3.1-flash-live-preview (実験版)

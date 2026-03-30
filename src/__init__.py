@@ -1,0 +1,1 @@
+# Bitget AI Trading Bot

@@ -1,0 +1,30 @@
+[Unit]
+Description=Bitget AI Trading Bot (Python Daemon)
+After=network.target
+
+[Service]
+Type=simple
+# ボットを実行するユーザー（GCPのユーザー名に変更）
+User=__USER__
+Group=__USER__
+
+# ボットのディレクトリパス（クローンした場所に合致させる）
+WorkingDirectory=/home/__USER__/bitget-trading-bot
+
+# 仮想環境のPythonを使って実行
+ExecStart=/home/__USER__/bitget-trading-bot/venv/bin/python -m src.main
+
+# 標準出力とエラー出力をsyslog（journalctl）に流す
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=bitget-bot
+
+# クラッシュしたら10秒待って自動再起動する
+Restart=always
+RestartSec=10
+
+# Pythonのバッファリングを無効化（ログがリアルタイムで見れるように）
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

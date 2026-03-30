@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.env
+data/state.json
+data/trades/
+data/events/
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
