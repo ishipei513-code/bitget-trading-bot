@@ -230,7 +230,9 @@ class Executor:
             f"サイズ: {size} {self.coin_name}\n"
             f"エントリー: {entry_price} → エグジット: {exit_price}\n"
             f"PnL: {pnl:+.2f} USDT\n"
-            f"理由: {reason}"
+            f"理由: {reason}\n"
+            f"勝率: {self.risk_manager.win_rate:.1f}%\n"
+            f"連敗: {self.risk_manager.consecutive_losses}"
         )
 
         return True

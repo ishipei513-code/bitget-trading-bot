@@ -58,8 +58,23 @@ class RiskManager:
             self.config.max_position_size,
         )
 
-        # 最小注文単位（0.01 ETH）に丸める
-        size = max(round(size, 2), 0.01)
+        # 通貨に応じた最小注文単位の調整
+        # 低価格トークン（SIREN等）は最低10枚、高価格（BTC等）は0.001等
+        if entry_price < 1:
+            # $1未満の低価格トークン: 最小10枚、整数に丸め
+            size = max(round(size), 10)
+        elif entry_price < 10:
+            # $1-$10: 最小1枚、小数1桁
+            size = max(round(size, 1), 1)
+        elif entry_price < 100:
+            # $10-$100 (SOL等): 最小0.1枚
+            size = max(round(size, 1), 0.1)
+        elif entry_price < 1000:
+            # $100-$1000 (BNB, TSLA等): 最小0.01枚
+            size = max(round(size, 2), 0.01)
+        else:
+            # $1000以上 (BTC, ETH等): 最小0.001枚
+            size = max(round(size, 3), 0.001)
 
         # 通貨名を動的に取得
         coin = self.config.symbol.split('/')[0]

@@ -33,18 +33,20 @@ from src.state.state_manager import StateManager
 from src.notification.notifier import Notifier
 
 
-def setup_logging(level: str = "INFO"):
+def setup_logging(level: str = "INFO", data_dir: str = "data"):
     """ログ設定"""
     log_format = (
         "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
     )
+    log_path = Path(data_dir)
+    log_path.mkdir(parents=True, exist_ok=True)
     logging.basicConfig(
         level=getattr(logging, level.upper(), logging.INFO),
         format=log_format,
         handlers=[
             logging.StreamHandler(sys.stdout),
             logging.FileHandler(
-                "data/bot.log", encoding='utf-8', mode='a'
+                str(log_path / "bot.log"), encoding='utf-8', mode='a'
             ),
         ],
     )
@@ -80,10 +82,13 @@ class TradingBot:
         if config.bot_mode == "dry_run" and not config.gemini.api_key:
             self.ai_client = MockGeminiClient()
         else:
-            self.ai_client = GeminiClient(config.gemini)
+            self.ai_client = GeminiClient(config.gemini, symbol=config.trading.symbol)
 
         # AIトリガー
         self.trigger_evaluator = AITriggerEvaluator(config.trading)
+        
+        # 日次レポート用ステート
+        self._last_report_date = self.state_manager._today_str()
 
         # Executor
         self.executor = Executor(
@@ -169,6 +174,18 @@ class TradingBot:
             try:
                 self._cycle_count += 1
                 cycle_start = time.time()
+
+                current_date = self.state_manager._today_str()
+                if self._last_report_date != current_date:
+                    logger.info("日付変更を検知: 日次サマリー送信")
+                    stats = self.risk_manager.stats.copy()
+                    state = self.state_manager.get_state()
+                    stats['ai_calls'] = state.get('stats', {}).get('ai_calls', 0)
+                    stats['guardrail_blocks'] = state.get('stats', {}).get('guardrail_blocks', 0)
+                    
+                    self.notifier.send_daily_summary(stats)
+                    self.risk_manager.reset_daily()
+                    self._last_report_date = current_date
 
                 logger.info(f"--- サイクル #{self._cycle_count} ---")
 
@@ -299,11 +316,11 @@ class TradingBot:
 def main():
     """エントリーポイント"""
     config = load_config()
-    setup_logging(config.log_level)
+    setup_logging(config.log_level, str(config.data_dir))
 
     # データディレクトリ確認
-    Path("data/trades").mkdir(parents=True, exist_ok=True)
-    Path("data/events").mkdir(parents=True, exist_ok=True)
+    (config.data_dir / "trades").mkdir(parents=True, exist_ok=True)
+    (config.data_dir / "events").mkdir(parents=True, exist_ok=True)
 
     bot = TradingBot(config)
     bot.initialize()

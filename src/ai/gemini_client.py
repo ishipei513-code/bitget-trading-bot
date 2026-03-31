@@ -12,7 +12,7 @@ from pydantic import BaseModel, Field
 from typing import Literal
 
 from src.config import GeminiConfig
-from src.ai.prompts import SYSTEM_PROMPT, build_decision_prompt
+from src.ai.prompts import build_system_prompt, build_decision_prompt
 
 logger = logging.getLogger(__name__)
 
@@ -31,12 +31,13 @@ class TradingDecision(BaseModel):
 class GeminiClient:
     """Google Gemini APIクライアント (google-genai SDK)"""
 
-    def __init__(self, config: GeminiConfig):
+    def __init__(self, config: GeminiConfig, symbol: str = "ETH/USDT:USDT"):
         self.config = config
         self._client = None
         self._call_count = 0
         self._max_retries = 3
         self._retry_delay = 30  # レート制限時の待機秒数
+        self._system_prompt = build_system_prompt(symbol)
 
     def initialize(self):
         """Gemini APIを初期化"""
@@ -82,7 +83,7 @@ class GeminiClient:
                     model=self.config.model,
                     contents=prompt,
                     config=types.GenerateContentConfig(
-                        system_instruction=SYSTEM_PROMPT,
+                        system_instruction=self._system_prompt,
                         response_mime_type="application/json",
                         temperature=self.config.temperature,
                     ),

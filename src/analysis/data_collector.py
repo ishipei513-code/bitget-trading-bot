@@ -122,8 +122,9 @@ class DataCollector:
         # ポジション状態
         if p:
             pos = p[0]
+            coin = self.config.symbol.split('/')[0]
             pos_str = (
-                f"Position: {pos['side'].upper()} {pos['size']} ETH "
+                f"Position: {pos['side'].upper()} {pos['size']} {coin} "
                 f"@ {pos['entry_price']} | "
                 f"Unrealized PnL: {pos['unrealized_pnl']:.2f} USDT"
             )
