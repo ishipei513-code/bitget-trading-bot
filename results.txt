@@ -1,0 +1,41 @@
+=== 最新のトレード結果をチェック中 ===
+
+--- BITGET-BOT ---
+Apr 01 00:21:26 vm-8bc5de43-8a python[35744]: 2026-04-01 00:21:26,122 [INFO] __main__: サイクル完了: 0.39秒 | AI呼出=7 | 注文=1 | ガードレール={'total': 7, 'passed': 7, 'blocked': 0, 'block_rate': 0.0}
+Apr 01 00:22:26 vm-8bc5de43-8a python[35744]: 2026-04-01 00:22:26,128 [INFO] __main__: サイクル完了: 0.39秒 | AI呼出=7 | 注文=1 | ガードレール={'total': 7, 'passed': 7, 'blocked': 0, 'block_rate': 0.0}
+Apr 01 00:23:26 vm-8bc5de43-8a python[35744]: 2026-04-01 00:23:26,123 [INFO] __main__: サイクル完了: 0.39秒 | AI呼出=7 | 注文=1 | ガードレール={'total': 7, 'passed': 7, 'blocked': 0, 'block_rate': 0.0}
+Apr 01 00:24:26 vm-8bc5de43-8a python[35744]: 2026-04-01 00:24:26,126 [INFO] __main__: サイクル完了: 0.39秒 | AI呼出=7 | 注文=1 | ガードレール={'total': 7, 'passed': 7, 'blocked': 0, 'block_rate': 0.0}
+Apr 01 00:25:28 vm-8bc5de43-8a python[35744]: 2026-04-01 00:25:28,233 [INFO] __main__: サイクル完了: 2.49秒 | AI呼出=8 | 注文=1 | ガードレール={'total': 8, 'passed': 8, 'blocked': 0, 'block_rate': 0.0}
+最近のAI判断: Apr 01 00:25:28 vm-8bc5de43-8a python[35744]: 2026-04-01 00:25:28,232 [INFO] src.ai.gemini_client: Gemini判断: action=HOLD confidence=0.00 size=0.0 SL=0.0 TP=0.0
+
+--- BITGET-BOT-BTC ---
+Mar 31 22:56:15 vm-8bc5de43-8a python[34436]: 2026-03-31 22:56:15,545 [INFO] __main__: サイクル完了: 0.38秒 | AI呼出=3 | 注文=0 | ガードレール={'total': 3, 'passed': 3, 'blocked': 0, 'block_rate': 0.0}
+Mar 31 22:57:18 vm-8bc5de43-8a python[34436]: 2026-03-31 22:57:18,029 [INFO] __main__: サイクル完了: 2.86秒 | AI呼出=4 | 注文=0 | ガードレール={'total': 4, 'passed': 4, 'blocked': 0, 'block_rate': 0.0}
+Mar 31 22:58:15 vm-8bc5de43-8a python[34436]: 2026-03-31 22:58:15,560 [INFO] __main__: サイクル完了: 0.39秒 | AI呼出=4 | 注文=0 | ガードレール={'total': 4, 'passed': 4, 'blocked': 0, 'block_rate': 0.0}
+Mar 31 22:59:15 vm-8bc5de43-8a python[34436]: 2026-03-31 22:59:15,553 [INFO] __main__: サイクル完了: 0.38秒 | AI呼出=4 | 注文=0 | ガードレール={'total': 4, 'passed': 4, 'blocked': 0, 'block_rate': 0.0}
+Mar 31 23:00:15 vm-8bc5de43-8a python[34436]: 2026-03-31 23:00:15,556 [INFO] __main__: サイクル完了: 0.39秒 | AI呼出=4 | 注文=0 | ガードレール={'total': 4, 'passed': 4, 'blocked': 0, 'block_rate': 0.0}
+最近のAI判断: Mar 31 22:57:18 vm-8bc5de43-8a python[34436]: 2026-03-31 22:57:18,028 [INFO] src.ai.gemini_client: Gemini判断: action=HOLD confidence=0.00 size=0.0 SL=0.0 TP=0.0
+
+--- BITGET-BOT-SOL ---
+Apr 01 00:21:25 vm-8bc5de43-8a python[35743]: 2026-04-01 00:21:25,988 [INFO] __main__: サイクル完了: 0.39秒 | AI呼出=6 | 注文=1 | ガードレール={'total': 6, 'passed': 6, 'blocked': 0, 'block_rate': 0.0}
+Apr 01 00:22:25 vm-8bc5de43-8a python[35743]: 2026-04-01 00:22:25,988 [INFO] __main__: サイクル完了: 0.38秒 | AI呼出=6 | 注文=1 | ガードレール={'total': 6, 'passed': 6, 'blocked': 0, 'block_rate': 0.0}
+Apr 01 00:23:25 vm-8bc5de43-8a python[35743]: 2026-04-01 00:23:25,988 [INFO] __main__: サイクル完了: 0.38秒 | AI呼出=6 | 注文=1 | ガードレール={'total': 6, 'passed': 6, 'blocked': 0, 'block_rate': 0.0}
+Apr 01 00:24:25 vm-8bc5de43-8a python[35743]: 2026-04-01 00:24:25,992 [INFO] __main__: サイクル完了: 0.39秒 | AI呼出=6 | 注文=1 | ガードレール={'total': 6, 'passed': 6, 'blocked': 0, 'block_rate': 0.0}
+Apr 01 00:25:25 vm-8bc5de43-8a python[35743]: 2026-04-01 00:25:25,994 [INFO] __main__: サイクル完了: 0.39秒 | AI呼出=6 | 注文=1 | ガードレール={'total': 6, 'passed': 6, 'blocked': 0, 'block_rate': 0.0}
+最近のAI判断: Apr 01 00:16:27 vm-8bc5de43-8a python[35743]: 2026-04-01 00:16:27,886 [INFO] src.ai.gemini_client: Gemini判断: action=HOLD confidence=0.00 size=0.0 SL=0.0 TP=0.0
+
+--- BITGET-BOT-TSLA ---
+Apr 01 00:21:26 vm-8bc5de43-8a python[35758]: 2026-04-01 00:21:26,557 [INFO] __main__: サイクル完了: 0.39秒 | AI呼出=7 | 注文=1 | ガードレール={'total': 7, 'passed': 7, 'blocked': 0, 'block_rate': 0.0}
+Apr 01 00:22:28 vm-8bc5de43-8a python[35758]: 2026-04-01 00:22:28,970 [INFO] __main__: サイクル完了: 2.80秒 | AI呼出=8 | 注文=1 | ガードレール={'total': 8, 'passed': 8, 'blocked': 0, 'block_rate': 0.0}
+Apr 01 00:23:26 vm-8bc5de43-8a python[35758]: 2026-04-01 00:23:26,550 [INFO] __main__: サイクル完了: 0.38秒 | AI呼出=8 | 注文=1 | ガードレール={'total': 8, 'passed': 8, 'blocked': 0, 'block_rate': 0.0}
+Apr 01 00:24:26 vm-8bc5de43-8a python[35758]: 2026-04-01 00:24:26,551 [INFO] __main__: サイクル完了: 0.38秒 | AI呼出=8 | 注文=1 | ガードレール={'total': 8, 'passed': 8, 'blocked': 0, 'block_rate': 0.0}
+Apr 01 00:25:26 vm-8bc5de43-8a python[35758]: 2026-04-01 00:25:26,552 [INFO] __main__: サイクル完了: 0.38秒 | AI呼出=8 | 注文=1 | ガードレール={'total': 8, 'passed': 8, 'blocked': 0, 'block_rate': 0.0}
+最近のAI判断: Apr 01 00:22:28 vm-8bc5de43-8a python[35758]: 2026-04-01 00:22:28,969 [INFO] src.ai.gemini_client: Gemini判断: action=HOLD confidence=0.66 size=0.0 SL=0.0 TP=0.0
+
+--- BITGET-BOT-SIREN ---
+Apr 01 00:21:37 vm-8bc5de43-8a python[35757]: 2026-04-01 00:21:37,614 [INFO] __main__: サイクル完了: 2.51秒 | AI呼出=19 | 注文=0 | ガードレール={'total': 16, 'passed': 16, 'blocked': 0, 'block_rate': 0.0}
+Apr 01 00:22:35 vm-8bc5de43-8a python[35757]: 2026-04-01 00:22:35,493 [INFO] __main__: サイクル完了: 0.38秒 | AI呼出=19 | 注文=0 | ガードレール={'total': 16, 'passed': 16, 'blocked': 0, 'block_rate': 0.0}
+Apr 01 00:23:35 vm-8bc5de43-8a python[35757]: 2026-04-01 00:23:35,494 [INFO] __main__: サイクル完了: 0.38秒 | AI呼出=19 | 注文=0 | ガードレール={'total': 16, 'passed': 16, 'blocked': 0, 'block_rate': 0.0}
+Apr 01 00:24:37 vm-8bc5de43-8a python[35757]: 2026-04-01 00:24:37,497 [INFO] __main__: サイクル完了: 2.39秒 | AI呼出=20 | 注文=0 | ガードレール={'total': 17, 'passed': 17, 'blocked': 0, 'block_rate': 0.0}
+Apr 01 00:25:35 vm-8bc5de43-8a python[35757]: 2026-04-01 00:25:35,498 [INFO] __main__: サイクル完了: 0.39秒 | AI呼出=20 | 注文=0 | ガードレール={'total': 17, 'passed': 17, 'blocked': 0, 'block_rate': 0.0}
+最近のAI判断: Apr 01 00:24:37 vm-8bc5de43-8a python[35757]: 2026-04-01 00:24:37,496 [INFO] src.ai.gemini_client: Gemini判断: action=HOLD confidence=0.60 size=0.0 SL=0.0 TP=0.0

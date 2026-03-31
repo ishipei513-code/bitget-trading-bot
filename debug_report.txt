@@ -1,0 +1,186 @@
+
+============================================================
+  BITGET-BOT
+============================================================
+Status: deactivating
+
+--- Latest logs ---
+Mar 31 23:25:37 vm-8bc5de43-8a python[35470]: 2026-03-31 23:25:37,485 [INFO] __main__: シンボル: BNB/USDT:USDT
+Mar 31 23:25:37 vm-8bc5de43-8a python[35470]: 2026-03-31 23:25:37,485 [INFO] __main__: レバレッジ: 5x
+Mar 31 23:25:37 vm-8bc5de43-8a python[35470]: 2026-03-31 23:25:37,485 [INFO] __main__: 初期資金: 15.0 USDT
+Mar 31 23:25:37 vm-8bc5de43-8a python[35470]: 2026-03-31 23:25:37,485 [INFO] __main__: 1Rリスク: 5.0%
+Mar 31 23:25:37 vm-8bc5de43-8a python[35470]: 2026-03-31 23:25:37,485 [INFO] __main__: ============================================================
+Mar 31 23:25:38 vm-8bc5de43-8a python[35470]: 2026-03-31 23:25:38,586 [INFO] src.exchange.bitget_client: レバレッジ設定: 5x (BNB/USDT:USDT)
+Mar 31 23:25:38 vm-8bc5de43-8a python[35470]: 2026-03-31 23:25:38,586 [INFO] src.exchange.bitget_client: Bitget接続初期化完了
+Mar 31 23:25:39 vm-8bc5de43-8a python[35470]: 2026-03-31 23:25:39,822 [INFO] src.ai.gemini_client: Gemini API初期化完了: model=gemini-3.1-flash-lite-preview
+Mar 31 23:25:40 vm-8bc5de43-8a python[35470]: 2026-03-31 23:25:40,191 [INFO] __main__: メインループ開始
+Mar 31 23:25:40 vm-8bc5de43-8a python[35470]: 2026-03-31 23:25:40,191 [INFO] __main__: --- サイクル #1 ---
+Mar 31 23:25:40 vm-8bc5de43-8a python[35470]: 2026-03-31 23:25:40,580 [INFO] src.analysis.data_collector: データ収集完了: Price=614.08 RSI=57.3 Structure=BULLISH Events=0
+Mar 31 23:25:40 vm-8bc5de43-8a python[35470]: 2026-03-31 23:25:40,580 [INFO] src.ai.gemini_client: Gemini API呼び出し #1 (試行1/3)
+Mar 31 23:25:40 vm-8bc5de43-8a python[35470]: 2026-03-31 23:25:40,580 [INFO] google_genai.models: AFC is enabled with max remote calls: 10.
+Mar 31 23:25:42 vm-8bc5de43-8a python[35470]: 2026-03-31 23:25:42,961 [INFO] httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-preview:generateContent "HTTP/1.1 200 OK"
+Mar 31 23:25:42 vm-8bc5de43-8a python[35470]: 2026-03-31 23:25:42,963 [INFO] src.ai.gemini_client: Gemini判断: action=HOLD confidence=0.72 size=0.0 SL=0.0 TP=0.0
+Mar 31 23:25:42 vm-8bc5de43-8a python[35470]: 2026-03-31 23:25:42,963 [INFO] __main__: サイクル完了: 2.77秒 | AI呼出=1 | 注文=0 | ガードレール={'total': 1, 'passed': 1, 'blocked': 0, 'block_rate': 0.0}
+Mar 31 23:25:43 vm-8bc5de43-8a python[35470]: 2026-03-31 23:25:43,051 [INFO] src.exchange.websocket_client: WebSocket接続成功: wss://ws.bitget.com/v2/ws/public
+Mar 31 23:25:43 vm-8bc5de43-8a python[35470]: 2026-03-31 23:25:43,051 [INFO] src.exchange.websocket_client: チャネル購読: ticker/USDT-FUTURES/BNBUSDT
+Mar 31 23:25:43 vm-8bc5de43-8a python[35470]: 2026-03-31 23:25:43,067 [INFO] src.exchange.websocket_client: 購読確認: {'event': 'subscribe', 'arg': {'instType': 'USDT-FUTURES', 'channel': 'ticker', 'instId': 'BNBUSDT'}}
+Mar 31 23:26:40 vm-8bc5de43-8a python[35470]: 2026-03-31 23:26:40,192 [INFO] __main__: --- サイクル #2 ---
+Mar 31 23:26:40 vm-8bc5de43-8a python[35470]: 2026-03-31 23:26:40,577 [INFO] src.analysis.data_collector: データ収集完了: Price=613.99 RSI=56.4 Structure=BULLISH Events=0
+Mar 31 23:26:40 vm-8bc5de43-8a python[35470]: 2026-03-31 23:26:40,578 [INFO] __main__: サイクル完了: 0.39秒 | AI呼出=1 | 注文=0 | ガードレール={'total': 1, 'passed': 1, 'blocked': 0, 'block_rate': 0.0}
+Mar 31 23:27:40 vm-8bc5de43-8a python[35470]: 2026-03-31 23:27:40,193 [INFO] __main__: --- サイクル #3 ---
+Mar 31 23:27:40 vm-8bc5de43-8a python[35470]: 2026-03-31 23:27:40,580 [INFO] src.analysis.data_collector: データ収集完了: Price=614.03 RSI=56.7 Structure=BULLISH Events=0
+Mar 31 23:27:40 vm-8bc5de43-8a python[35470]: 2026-03-31 23:27:40,580 [INFO] __main__: サイクル完了: 0.39秒 | AI呼出=1 | 注文=0 | ガードレール={'total': 1, 'passed': 1, 'blocked': 0, 'block_rate': 0.0}
+Mar 31 23:28:40 vm-8bc5de43-8a python[35470]: 2026-03-31 23:28:40,194 [INFO] __main__: --- サイクル #4 ---
+Mar 31 23:28:40 vm-8bc5de43-8a python[35470]: 2026-03-31 23:28:40,581 [INFO] src.analysis.data_collector: データ収集完了: Price=613.78 RSI=53.9 Structure=BULLISH Events=0
+Mar 31 23:28:40 vm-8bc5de43-8a python[35470]: 2026-03-31 23:28:40,582 [INFO] __main__: サイクル完了: 0.39秒 | AI呼出=1 | 注文=0 | ガードレール={'total': 1, 'passed': 1, 'blocked': 0, 'block_rate': 0.0}
+Mar 31 23:28:51 vm-8bc5de43-8a python[35470]: 2026-03-31 23:28:51,630 [INFO] __main__: シャットダウン開始...
+Mar 31 23:28:51 vm-8bc5de43-8a systemd[1]: Stopping bitget-bot.service - Bitget AI Trading Bot...
+
+--- Errors/Warnings ---
+Mar 31 21:34:44 vm-8bc5de43-8a python[32810]: Traceback (most recent call last):
+Mar 31 21:34:44 vm-8bc5de43-8a python[32810]: ModuleNotFoundError: No module named 'src'
+Mar 31 21:34:54 vm-8bc5de43-8a python[32812]: Traceback (most recent call last):
+Mar 31 21:34:54 vm-8bc5de43-8a python[32812]: ModuleNotFoundError: No module named 'src'
+Mar 31 21:35:04 vm-8bc5de43-8a python[32817]: Traceback (most recent call last):
+Mar 31 21:35:04 vm-8bc5de43-8a python[32817]: ModuleNotFoundError: No module named 'src'
+Mar 31 21:35:14 vm-8bc5de43-8a python[32819]: Traceback (most recent call last):
+Mar 31 21:35:14 vm-8bc5de43-8a python[32819]: ModuleNotFoundError: No module named 'src'
+Mar 31 21:35:25 vm-8bc5de43-8a python[32821]: Traceback (most recent call last):
+Mar 31 21:35:25 vm-8bc5de43-8a python[32821]: ModuleNotFoundError: No module named 'src'
+
+
+============================================================
+  BITGET-BOT-SOL
+============================================================
+Status: deactivating
+
+--- Latest logs ---
+Mar 31 23:25:37 vm-8bc5de43-8a python[35472]: 2026-03-31 23:25:37,613 [INFO] __main__: シンボル: SOL/USDT:USDT
+Mar 31 23:25:37 vm-8bc5de43-8a python[35472]: 2026-03-31 23:25:37,613 [INFO] __main__: レバレッジ: 5x
+Mar 31 23:25:37 vm-8bc5de43-8a python[35472]: 2026-03-31 23:25:37,613 [INFO] __main__: 初期資金: 15.0 USDT
+Mar 31 23:25:37 vm-8bc5de43-8a python[35472]: 2026-03-31 23:25:37,614 [INFO] __main__: 1Rリスク: 5.0%
+Mar 31 23:25:37 vm-8bc5de43-8a python[35472]: 2026-03-31 23:25:37,614 [INFO] __main__: ============================================================
+Mar 31 23:25:38 vm-8bc5de43-8a python[35472]: 2026-03-31 23:25:38,467 [INFO] src.exchange.bitget_client: レバレッジ設定: 5x (SOL/USDT:USDT)
+Mar 31 23:25:38 vm-8bc5de43-8a python[35472]: 2026-03-31 23:25:38,467 [INFO] src.exchange.bitget_client: Bitget接続初期化完了
+Mar 31 23:25:39 vm-8bc5de43-8a python[35472]: 2026-03-31 23:25:39,781 [INFO] src.ai.gemini_client: Gemini API初期化完了: model=gemini-3.1-flash-lite-preview
+Mar 31 23:25:40 vm-8bc5de43-8a python[35472]: 2026-03-31 23:25:40,078 [INFO] __main__: メインループ開始
+Mar 31 23:25:40 vm-8bc5de43-8a python[35472]: 2026-03-31 23:25:40,078 [INFO] __main__: --- サイクル #1 ---
+Mar 31 23:25:40 vm-8bc5de43-8a python[35472]: 2026-03-31 23:25:40,464 [INFO] src.analysis.data_collector: データ収集完了: Price=82.102 RSI=54.3 Structure=BULLISH Events=0
+Mar 31 23:25:40 vm-8bc5de43-8a python[35472]: 2026-03-31 23:25:40,464 [INFO] src.ai.gemini_client: Gemini API呼び出し #1 (試行1/3)
+Mar 31 23:25:40 vm-8bc5de43-8a python[35472]: 2026-03-31 23:25:40,464 [INFO] google_genai.models: AFC is enabled with max remote calls: 10.
+Mar 31 23:25:41 vm-8bc5de43-8a python[35472]: 2026-03-31 23:25:41,857 [INFO] httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-preview:generateContent "HTTP/1.1 200 OK"
+Mar 31 23:25:41 vm-8bc5de43-8a python[35472]: 2026-03-31 23:25:41,859 [INFO] src.ai.gemini_client: Gemini判断: action=HOLD confidence=0.72 size=0.0 SL=0.0 TP=0.0
+Mar 31 23:25:41 vm-8bc5de43-8a python[35472]: 2026-03-31 23:25:41,860 [INFO] __main__: サイクル完了: 1.78秒 | AI呼出=1 | 注文=0 | ガードレール={'total': 1, 'passed': 1, 'blocked': 0, 'block_rate': 0.0}
+Mar 31 23:25:41 vm-8bc5de43-8a python[35472]: 2026-03-31 23:25:41,955 [INFO] src.exchange.websocket_client: WebSocket接続成功: wss://ws.bitget.com/v2/ws/public
+Mar 31 23:25:41 vm-8bc5de43-8a python[35472]: 2026-03-31 23:25:41,955 [INFO] src.exchange.websocket_client: チャネル購読: ticker/USDT-FUTURES/SOLUSDT
+Mar 31 23:25:41 vm-8bc5de43-8a python[35472]: 2026-03-31 23:25:41,973 [INFO] src.exchange.websocket_client: 購読確認: {'event': 'subscribe', 'arg': {'instType': 'USDT-FUTURES', 'channel': 'ticker', 'instId': 'SOLUSDT'}}
+Mar 31 23:26:40 vm-8bc5de43-8a python[35472]: 2026-03-31 23:26:40,079 [INFO] __main__: --- サイクル #2 ---
+Mar 31 23:26:40 vm-8bc5de43-8a python[35472]: 2026-03-31 23:26:40,463 [INFO] src.analysis.data_collector: データ収集完了: Price=82.058 RSI=52.8 Structure=BULLISH Events=0
+Mar 31 23:26:40 vm-8bc5de43-8a python[35472]: 2026-03-31 23:26:40,463 [INFO] __main__: サイクル完了: 0.38秒 | AI呼出=1 | 注文=0 | ガードレール={'total': 1, 'passed': 1, 'blocked': 0, 'block_rate': 0.0}
+Mar 31 23:27:40 vm-8bc5de43-8a python[35472]: 2026-03-31 23:27:40,080 [INFO] __main__: --- サイクル #3 ---
+Mar 31 23:27:40 vm-8bc5de43-8a python[35472]: 2026-03-31 23:27:40,460 [INFO] src.analysis.data_collector: データ収集完了: Price=82.094 RSI=53.7 Structure=BULLISH Events=0
+Mar 31 23:27:40 vm-8bc5de43-8a python[35472]: 2026-03-31 23:27:40,460 [INFO] __main__: サイクル完了: 0.38秒 | AI呼出=1 | 注文=0 | ガードレール={'total': 1, 'passed': 1, 'blocked': 0, 'block_rate': 0.0}
+Mar 31 23:28:40 vm-8bc5de43-8a python[35472]: 2026-03-31 23:28:40,082 [INFO] __main__: --- サイクル #4 ---
+Mar 31 23:28:40 vm-8bc5de43-8a python[35472]: 2026-03-31 23:28:40,468 [INFO] src.analysis.data_collector: データ収集完了: Price=82.154 RSI=55.8 Structure=BULLISH Events=0
+Mar 31 23:28:40 vm-8bc5de43-8a python[35472]: 2026-03-31 23:28:40,468 [INFO] __main__: サイクル完了: 0.39秒 | AI呼出=1 | 注文=0 | ガードレール={'total': 1, 'passed': 1, 'blocked': 0, 'block_rate': 0.0}
+Mar 31 23:28:51 vm-8bc5de43-8a python[35472]: 2026-03-31 23:28:51,778 [INFO] __main__: シャットダウン開始...
+Mar 31 23:28:51 vm-8bc5de43-8a systemd[1]: Stopping bitget-bot-sol.service - Bitget AI Trading Bot (SOL)...
+
+--- Errors/Warnings ---
+Mar 31 21:53:15 vm-8bc5de43-8a python[33355]: 2026-03-31 21:53:15,587 [ERROR] src.exchange.bitget_client: 決済エラー: bitget {"code":"22002","msg":"No position to close","requestTime":1774961595579,"data":null}
+Mar 31 21:53:15 vm-8bc5de43-8a python[33355]: 2026-03-31 21:53:15,587 [ERROR] src.trading.executor: ❌ 決済注文失敗: bitget {"code":"22002","msg":"No position to close","requestTime":1774961595579,"data":null}
+Mar 31 21:53:15 vm-8bc5de43-8a python[33355]: 2026-03-31 21:53:15,588 [WARNING] src.trading.executor: 取引所側でポジション既に決済済み - 内部状態をクリアします
+Mar 31 21:53:15 vm-8bc5de43-8a python[33355]: 2026-03-31 21:53:15,588 [WARNING] src.trading.risk_manager: 負けトレード: -0.01 USDT (連敗: 1回)
+Mar 31 22:20:58 vm-8bc5de43-8a python[33680]: 2026-03-31 22:20:58,905 [WARNING] src.exchange.bitget_client: get_positionsが空のためフォールバック使用: long 0.5
+Mar 31 22:20:59 vm-8bc5de43-8a python[33680]: 2026-03-31 22:20:59,007 [ERROR] src.exchange.bitget_client: 決済エラー: bitget {"code":"22002","msg":"No position to close","requestTime":1774963258996,"data":null}
+Mar 31 22:20:59 vm-8bc5de43-8a python[33680]: 2026-03-31 22:20:59,008 [ERROR] src.trading.executor: ❌ 決済注文失敗: bitget {"code":"22002","msg":"No position to close","requestTime":1774963258996,"data":null}
+Mar 31 22:20:59 vm-8bc5de43-8a python[33680]: 2026-03-31 22:20:59,008 [WARNING] src.trading.executor: 取引所側でポジション既に決済済み - 内部状態をクリアします
+Mar 31 22:20:59 vm-8bc5de43-8a python[33680]: 2026-03-31 22:20:59,008 [WARNING] src.trading.risk_manager: 負けトレード: -0.05 USDT (連敗: 1回)
+
+
+============================================================
+  BITGET-BOT-TSLA
+============================================================
+Status: deactivating
+
+--- Latest logs ---
+Mar 31 23:25:40 vm-8bc5de43-8a python[35485]: 2026-03-31 23:25:40,490 [INFO] __main__: メインループ開始
+Mar 31 23:25:40 vm-8bc5de43-8a python[35485]: 2026-03-31 23:25:40,490 [INFO] __main__: --- サイクル #1 ---
+Mar 31 23:25:40 vm-8bc5de43-8a python[35485]: 2026-03-31 23:25:40,883 [INFO] src.analysis.data_collector: データ収集完了: Price=365.43 RSI=61.1 Structure=BULLISH Events=0
+Mar 31 23:25:40 vm-8bc5de43-8a python[35485]: 2026-03-31 23:25:40,883 [INFO] src.ai.trigger_evaluator: AI呼び出し決定 - 保険ポーリング: NORMAL相場 (600秒間隔)
+Mar 31 23:25:40 vm-8bc5de43-8a python[35485]: 2026-03-31 23:25:40,883 [INFO] src.ai.gemini_client: Gemini API呼び出し #1 (試行1/3)
+Mar 31 23:25:40 vm-8bc5de43-8a python[35485]: 2026-03-31 23:25:40,883 [INFO] google_genai.models: AFC is enabled with max remote calls: 10.
+Mar 31 23:25:42 vm-8bc5de43-8a python[35485]: 2026-03-31 23:25:42,783 [INFO] httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-preview:generateContent "HTTP/1.1 200 OK"
+Mar 31 23:25:42 vm-8bc5de43-8a python[35485]: 2026-03-31 23:25:42,785 [INFO] src.ai.gemini_client: Gemini判断: action=ENTER_LONG confidence=0.78 size=0.055 SL=364.75 TP=366.79
+Mar 31 23:25:42 vm-8bc5de43-8a python[35485]: 2026-03-31 23:25:42,785 [INFO] src.trading.guardrail: ✅ ガードレール全通過: ENTER_LONG
+Mar 31 23:25:42 vm-8bc5de43-8a python[35485]: 2026-03-31 23:25:42,785 [INFO] src.trading.risk_manager: ポジションサイズ計算: risk_based=2.2232 margin_based=0.1954 max=0.8 → 0.2 TSLA
+Mar 31 23:25:42 vm-8bc5de43-8a python[35485]: 2026-03-31 23:25:42,786 [INFO] src.exchange.bitget_client: 発注: BUY 0.055 TSLA/USDT:USDT @ 市場価格 SL=364.75 TP=366.79
+Mar 31 23:25:42 vm-8bc5de43-8a python[35485]: 2026-03-31 23:25:42,830 [INFO] src.exchange.bitget_client: 注文成功: ID=1422880814965366785
+Mar 31 23:25:42 vm-8bc5de43-8a python[35485]: 2026-03-31 23:25:42,830 [INFO] src.trading.executor: ✅ エントリー注文成功: ID=1422880814965366785
+Mar 31 23:25:42 vm-8bc5de43-8a python[35485]: 2026-03-31 23:25:42,830 [INFO] src.trading.rule_engine: RuleEngine: ポジション設定 LONG 0.055 @ 365.43 ルール数=3
+Mar 31 23:25:42 vm-8bc5de43-8a python[35485]: 2026-03-31 23:25:42,831 [INFO] src.state.state_manager: ポジション更新: long 0.055 @ 365.43
+Mar 31 23:25:43 vm-8bc5de43-8a python[35485]: 2026-03-31 23:25:43,407 [INFO] __main__: サイクル完了: 2.92秒 | AI呼出=1 | 注文=1 | ガードレール={'total': 1, 'passed': 1, 'blocked': 0, 'block_rate': 0.0}
+Mar 31 23:25:43 vm-8bc5de43-8a python[35485]: 2026-03-31 23:25:43,525 [INFO] src.exchange.websocket_client: WebSocket接続成功: wss://ws.bitget.com/v2/ws/public
+Mar 31 23:25:43 vm-8bc5de43-8a python[35485]: 2026-03-31 23:25:43,525 [INFO] src.exchange.websocket_client: チャネル購読: ticker/USDT-FUTURES/TSLAUSDT
+Mar 31 23:25:43 vm-8bc5de43-8a python[35485]: 2026-03-31 23:25:43,549 [INFO] src.exchange.websocket_client: 購読確認: {'event': 'subscribe', 'arg': {'instType': 'USDT-FUTURES', 'channel': 'ticker', 'instId': 'TSLAUSDT'}}
+Mar 31 23:26:40 vm-8bc5de43-8a python[35485]: 2026-03-31 23:26:40,492 [INFO] __main__: --- サイクル #2 ---
+Mar 31 23:26:40 vm-8bc5de43-8a python[35485]: 2026-03-31 23:26:40,877 [INFO] src.analysis.data_collector: データ収集完了: Price=365.24 RSI=59.1 Structure=BULLISH Events=0
+Mar 31 23:26:40 vm-8bc5de43-8a python[35485]: 2026-03-31 23:26:40,877 [INFO] __main__: サイクル完了: 0.38秒 | AI呼出=1 | 注文=1 | ガードレール={'total': 1, 'passed': 1, 'blocked': 0, 'block_rate': 0.0}
+Mar 31 23:27:40 vm-8bc5de43-8a python[35485]: 2026-03-31 23:27:40,494 [INFO] __main__: --- サイクル #3 ---
+Mar 31 23:27:40 vm-8bc5de43-8a python[35485]: 2026-03-31 23:27:40,878 [INFO] src.analysis.data_collector: データ収集完了: Price=365.23 RSI=58.7 Structure=BULLISH Events=0
+Mar 31 23:27:40 vm-8bc5de43-8a python[35485]: 2026-03-31 23:27:40,879 [INFO] __main__: サイクル完了: 0.38秒 | AI呼出=1 | 注文=1 | ガードレール={'total': 1, 'passed': 1, 'blocked': 0, 'block_rate': 0.0}
+Mar 31 23:28:40 vm-8bc5de43-8a python[35485]: 2026-03-31 23:28:40,495 [INFO] __main__: --- サイクル #4 ---
+Mar 31 23:28:40 vm-8bc5de43-8a python[35485]: 2026-03-31 23:28:40,880 [INFO] src.analysis.data_collector: データ収集完了: Price=365.34 RSI=59.5 Structure=BULLISH Events=0
+Mar 31 23:28:40 vm-8bc5de43-8a python[35485]: 2026-03-31 23:28:40,881 [INFO] __main__: サイクル完了: 0.39秒 | AI呼出=1 | 注文=1 | ガードレール={'total': 1, 'passed': 1, 'blocked': 0, 'block_rate': 0.0}
+Mar 31 23:28:51 vm-8bc5de43-8a python[35485]: 2026-03-31 23:28:51,920 [INFO] __main__: シャットダウン開始...
+Mar 31 23:28:51 vm-8bc5de43-8a systemd[1]: Stopping bitget-bot-tsla.service - Bitget AI Trading Bot (TSLA)...
+
+--- Errors/Warnings ---
+Mar 31 22:00:59 vm-8bc5de43-8a python[33559]: 2026-03-31 22:00:59,887 [ERROR] src.exchange.bitget_client: 決済エラー: bitget {"code":"22002","msg":"No position to close","requestTime":1774962059878,"data":null}
+Mar 31 22:00:59 vm-8bc5de43-8a python[33559]: 2026-03-31 22:00:59,887 [ERROR] src.trading.executor: ❌ 決済注文失敗: bitget {"code":"22002","msg":"No position to close","requestTime":1774962059878,"data":null}
+Mar 31 22:00:59 vm-8bc5de43-8a python[33559]: 2026-03-31 22:00:59,887 [WARNING] src.trading.executor: 取引所側でポジション既に決済済み - 内部状態をクリアします
+Mar 31 22:00:59 vm-8bc5de43-8a python[33559]: 2026-03-31 22:00:59,887 [WARNING] src.trading.risk_manager: 負けトレード: -0.03 USDT (連敗: 1回)
+
+
+============================================================
+  BITGET-BOT-SIREN
+============================================================
+Status: deactivating
+
+--- Latest logs ---
+Mar 31 23:25:40 vm-8bc5de43-8a python[35492]: 2026-03-31 23:25:40,957 [INFO] __main__: メインループ開始
+Mar 31 23:25:40 vm-8bc5de43-8a python[35492]: 2026-03-31 23:25:40,957 [INFO] __main__: --- サイクル #1 ---
+Mar 31 23:25:41 vm-8bc5de43-8a python[35492]: 2026-03-31 23:25:41,343 [INFO] src.analysis.data_collector: データ収集完了: Price=1.0149 RSI=44.1 Structure=RANGING Events=0
+Mar 31 23:25:41 vm-8bc5de43-8a python[35492]: 2026-03-31 23:25:41,343 [INFO] src.ai.trigger_evaluator: AI呼び出し決定 - 保険ポーリング: HIGH_VOL相場 (120秒間隔)
+Mar 31 23:25:41 vm-8bc5de43-8a python[35492]: 2026-03-31 23:25:41,343 [INFO] src.ai.gemini_client: Gemini API呼び出し #1 (試行1/3)
+Mar 31 23:25:41 vm-8bc5de43-8a python[35492]: 2026-03-31 23:25:41,343 [INFO] google_genai.models: AFC is enabled with max remote calls: 10.
+Mar 31 23:25:43 vm-8bc5de43-8a python[35492]: 2026-03-31 23:25:43,508 [INFO] httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-preview:generateContent "HTTP/1.1 200 OK"
+Mar 31 23:25:43 vm-8bc5de43-8a python[35492]: 2026-03-31 23:25:43,509 [INFO] src.ai.gemini_client: Gemini判断: action=HOLD confidence=0.00 size=0.0 SL=0.0 TP=0.0
+Mar 31 23:25:43 vm-8bc5de43-8a python[35492]: 2026-03-31 23:25:43,510 [INFO] __main__: サイクル完了: 2.55秒 | AI呼出=1 | 注文=0 | ガードレール={'total': 1, 'passed': 1, 'blocked': 0, 'block_rate': 0.0}
+Mar 31 23:25:43 vm-8bc5de43-8a python[35492]: 2026-03-31 23:25:43,600 [INFO] src.exchange.websocket_client: WebSocket接続成功: wss://ws.bitget.com/v2/ws/public
+Mar 31 23:25:43 vm-8bc5de43-8a python[35492]: 2026-03-31 23:25:43,601 [INFO] src.exchange.websocket_client: チャネル購読: ticker/USDT-FUTURES/SIRENUSDT
+Mar 31 23:25:43 vm-8bc5de43-8a python[35492]: 2026-03-31 23:25:43,618 [INFO] src.exchange.websocket_client: 購読確認: {'event': 'subscribe', 'arg': {'instType': 'USDT-FUTURES', 'channel': 'ticker', 'instId': 'SIRENUSDT'}}
+Mar 31 23:26:40 vm-8bc5de43-8a python[35492]: 2026-03-31 23:26:40,958 [INFO] __main__: --- サイクル #2 ---
+Mar 31 23:26:41 vm-8bc5de43-8a python[35492]: 2026-03-31 23:26:41,051 [INFO] src.analysis.technical: イベント検出: ['PRICE_SPIKE_UP_2.28%']
+Mar 31 23:26:41 vm-8bc5de43-8a python[35492]: 2026-03-31 23:26:41,346 [INFO] src.analysis.data_collector: データ収集完了: Price=1.04032 RSI=51.5 Structure=RANGING Events=1
+Mar 31 23:26:41 vm-8bc5de43-8a python[35492]: 2026-03-31 23:26:41,346 [INFO] __main__: サイクル完了: 0.39秒 | AI呼出=1 | 注文=0 | ガードレール={'total': 1, 'passed': 1, 'blocked': 0, 'block_rate': 0.0}
+Mar 31 23:27:40 vm-8bc5de43-8a python[35492]: 2026-03-31 23:27:40,959 [INFO] __main__: --- サイクル #3 ---
+Mar 31 23:27:41 vm-8bc5de43-8a python[35492]: 2026-03-31 23:27:41,053 [INFO] src.analysis.technical: イベント検出: ['PRICE_SPIKE_UP_0.84%']
+Mar 31 23:27:41 vm-8bc5de43-8a python[35492]: 2026-03-31 23:27:41,348 [INFO] src.analysis.data_collector: データ収集完了: Price=1.04884 RSI=52.5 Structure=RANGING Events=1
+Mar 31 23:27:41 vm-8bc5de43-8a python[35492]: 2026-03-31 23:27:41,348 [INFO] __main__: サイクル完了: 0.39秒 | AI呼出=1 | 注文=0 | ガードレール={'total': 1, 'passed': 1, 'blocked': 0, 'block_rate': 0.0}
+Mar 31 23:28:40 vm-8bc5de43-8a python[35492]: 2026-03-31 23:28:40,960 [INFO] __main__: --- サイクル #4 ---
+Mar 31 23:28:41 vm-8bc5de43-8a python[35492]: 2026-03-31 23:28:41,346 [INFO] src.analysis.data_collector: データ収集完了: Price=1.05038 RSI=52.5 Structure=RANGING Events=0
+Mar 31 23:28:41 vm-8bc5de43-8a python[35492]: 2026-03-31 23:28:41,346 [INFO] src.ai.trigger_evaluator: AI呼び出し決定 - 保険ポーリング: HIGH_VOL相場 (120秒間隔)
+Mar 31 23:28:41 vm-8bc5de43-8a python[35492]: 2026-03-31 23:28:41,346 [INFO] src.ai.gemini_client: Gemini API呼び出し #2 (試行1/3)
+Mar 31 23:28:41 vm-8bc5de43-8a python[35492]: 2026-03-31 23:28:41,347 [INFO] google_genai.models: AFC is enabled with max remote calls: 10.
+Mar 31 23:28:43 vm-8bc5de43-8a python[35492]: 2026-03-31 23:28:43,186 [INFO] httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-preview:generateContent "HTTP/1.1 200 OK"
+Mar 31 23:28:43 vm-8bc5de43-8a python[35492]: 2026-03-31 23:28:43,188 [INFO] src.ai.gemini_client: Gemini判断: action=HOLD confidence=0.00 size=0.0 SL=0.0 TP=0.0
+Mar 31 23:28:43 vm-8bc5de43-8a python[35492]: 2026-03-31 23:28:43,188 [INFO] __main__: サイクル完了: 2.23秒 | AI呼出=2 | 注文=0 | ガードレール={'total': 2, 'passed': 2, 'blocked': 0, 'block_rate': 0.0}
+Mar 31 23:28:52 vm-8bc5de43-8a systemd[1]: Stopping bitget-bot-siren.service - Bitget AI Trading Bot (SIREN)...
+Mar 31 23:28:52 vm-8bc5de43-8a python[35492]: 2026-03-31 23:28:52,066 [INFO] __main__: シャットダウン開始...
+
+--- Errors/Warnings ---
+Mar 31 23:16:25 vm-8bc5de43-8a python[34986]: 2026-03-31 23:16:25,383 [WARNING] src.exchange.bitget_client: get_positionsが空のためフォールバック使用: long 0.15
+Mar 31 23:16:25 vm-8bc5de43-8a python[34986]: 2026-03-31 23:16:25,384 [ERROR] src.exchange.bitget_client: 決済エラー: bitget amount of SIREN/USDT:USDT must be greater than minimum amount precision of 10
+Mar 31 23:16:25 vm-8bc5de43-8a python[34986]: 2026-03-31 23:16:25,384 [ERROR] src.trading.executor: ❌ 決済注文失敗: bitget amount of SIREN/USDT:USDT must be greater than minimum amount precision of 10
+

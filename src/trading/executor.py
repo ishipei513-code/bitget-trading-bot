@@ -58,8 +58,8 @@ class Executor:
             free_margin=balance.get('free', self.config.initial_capital),
         )
 
-        # AIの提案サイズとリスク管理サイズの小さい方
-        size = min(size, decision.size) if decision.size > 0 else size
+        # risk_managerのサイズを使用（最小注文量を考慮済み）
+        # AIの提案サイズは参考値としてログに残すのみ
 
         if size <= 0:
             logger.warning("ポジションサイズが0 - エントリー中止")
