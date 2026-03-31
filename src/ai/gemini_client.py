@@ -21,7 +21,7 @@ class TradingDecision(BaseModel):
     """Geminiからの判断結果の型定義"""
     action: Literal["ENTER_LONG", "ENTER_SHORT", "HOLD", "EXIT"]
     confidence: float = Field(ge=0.0, le=1.0)
-    size: float = Field(ge=0.0, le=10.0)
+    size: float = Field(ge=0.0, le=100000.0)  # 低価格トークン対応
     stop_loss_price: float = Field(ge=0.0)
     take_profit_price: float = Field(ge=0.0)
     rationale: str = ""
