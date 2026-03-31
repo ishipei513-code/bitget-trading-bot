@@ -72,9 +72,10 @@ class FormatGuard:
 
         # サイズ上限チェック
         if decision.size > self.config.max_position_size:
+            coin = self.config.symbol.split('/')[0]
             return False, (
                 f"サイズ上限超過: {decision.size} "
-                f"> {self.config.max_position_size} ETH"
+                f"> {self.config.max_position_size} {coin}"
             )
 
         # サイズ最小チェック（エントリー時）

@@ -161,7 +161,7 @@ class BitgetClient:
         注文を発注
         Args:
             side: 'buy' (ロング) or 'sell' (ショート)
-            amount: 数量（ETH）
+            amount: 数量（コイン枚数）
             price: 指値価格（Noneなら成行）
             stop_loss: ストップロス価格
             take_profit: テイクプロフィット価格
@@ -175,9 +175,9 @@ class BitgetClient:
             'tradeSide': 'open',  # 片方向モード: 新規エントリー
         }
         if stop_loss:
-            params['stopLoss'] = stop_loss
+            params['stopLoss'] = {'triggerPrice': str(stop_loss)}
         if take_profit:
-            params['takeProfit'] = take_profit
+            params['takeProfit'] = {'triggerPrice': str(take_profit)}
 
         try:
             logger.info(

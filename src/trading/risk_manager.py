@@ -61,12 +61,14 @@ class RiskManager:
         # 最小注文単位（0.01 ETH）に丸める
         size = max(round(size, 2), 0.01)
 
+        # 通貨名を動的に取得
+        coin = self.config.symbol.split('/')[0]
         logger.info(
             f"ポジションサイズ計算: "
             f"risk_based={risk_based:.4f} "
             f"margin_based={margin_based:.4f} "
             f"max={self.config.max_position_size} "
-            f"→ {size} ETH"
+            f"→ {size} {coin}"
         )
 
         return size

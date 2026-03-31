@@ -236,20 +236,14 @@ class Executor:
         return True
 
     def _build_exit_rules(self, decision: TradingDecision) -> list[ExitRule]:
-        """AIの判断からExitRuleリストを構築"""
+        """
+        AIの判断からExitRuleリストを構築
+
+        注意: TP/SLはBitget取引所側で管理するため、RuleEngineには登録しない。
+        RuleEngineはBotにしかできない機能（TrailingStop/Timeout/Breakeven）のみ担当。
+        これにより二重決済エラー（"No position to close"）を防止する。
+        """
         rules = []
-
-        if decision.stop_loss_price > 0:
-            rules.append(ExitRule(
-                rule_type=RuleType.STOP_LOSS,
-                price=decision.stop_loss_price,
-            ))
-
-        if decision.take_profit_price > 0:
-            rules.append(ExitRule(
-                rule_type=RuleType.TAKE_PROFIT,
-                price=decision.take_profit_price,
-            ))
 
         # Trailing Stop（デフォルト1.5%）
         rules.append(ExitRule(

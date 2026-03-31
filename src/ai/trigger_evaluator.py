@@ -44,25 +44,25 @@ class AITriggerEvaluator:
         # === イベントトリガー（即時）===
         if events:
             # イベントが検出された場合は即AI呼び出し
-            # ただし最低10秒のクールダウン
-            if elapsed >= 10:
+            # API節約のため、最低120秒のクールダウン
+            if elapsed >= 120:
                 reason = f"イベントトリガー: {', '.join(events)}"
                 logger.info(f"AI呼び出し決定 - {reason}")
                 return True, reason
             else:
                 logger.debug(
                     f"イベント検出だがクールダウン中 "
-                    f"(残り{10 - elapsed:.0f}秒)"
+                    f"(残り{120 - elapsed:.0f}秒)"
                 )
 
         # === EXTREME相場では呼び出し頻繁に ===
-        if volatility_regime == "EXTREME" and elapsed >= 30:
-            reason = "EXTREME相場 - 30秒ポーリング"
+        if volatility_regime == "EXTREME" and elapsed >= 60:
+            reason = "EXTREME相場 - 60秒ポーリング"
             return True, reason
 
         # === ポジション保有中は頻繁にチェック ===
-        if has_position and elapsed >= 60:
-            reason = "ポジション保有中 - 1分ポーリング"
+        if has_position and elapsed >= 180:
+            reason = "ポジション保有中 - 3分ポーリング"
             return True, reason
 
         # === 保険ポーリング（定期）===
