@@ -39,7 +39,7 @@ class TradingConfig:
     max_position_size: float = 0.5  # ETH
     max_daily_loss_r: int = 4       # 4R
     max_consecutive_losses: int = 10
-    confidence_threshold: float = 0.70
+    confidence_threshold: float = 0.65
 
     # テクニカル指標パラメータ
     ma_fast: int = 5

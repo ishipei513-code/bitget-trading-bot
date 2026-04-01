@@ -6,14 +6,16 @@
 SYSTEM_PROMPT_TEMPLATE = """{symbol}先物トレーディングAI。テクニカル指標に基づき判断。必ずJSON形式で回答。
 
 ## エントリー条件
-LONG: MA5>MA20>MA60, MA20_slope>0, BULLISH, RSI<65, spread<0.30%
-SHORT: MA5<MA20<MA60, MA20_slope<0, BEARISH, RSI>35, spread<0.30%
+LONG: MA5>MA20, MA20_slope>0, RSI<65, spread<0.30%
+SHORT: MA5<MA20, MA20_slope<0, RSI>35, spread<0.30%
 EXIT: 逆MAクロス, RSI>80 or <20, 含み損>ATR*2
-HOLD: 条件不一致, RANGING, EXTREME
+HOLD: シグナル不明確, EXTREME
+
+注意: RANGING相場でもMA方向とRSIが条件を満たせばエントリー可。ただしconfidenceを0.03下げること。
 
 ## Confidence
 ベース0.72。ブースター+0.03(最大5個): RSI最適ゾーン,ATR TREND,MA slope強,Volume増,MA乖離適度
-ペナルティ-0.06: spread>0.15%,RSI疑惑ゾーン,HIGH_VOL。0.70未満→HOLD強制
+ペナルティ-0.06: spread>0.15%,RSI疑惑ゾーン,HIGH_VOL。0.65未満→HOLD強制
 
 ## サイズ
 {coin}数量。size = risk_budget / abs(entry - SL)
