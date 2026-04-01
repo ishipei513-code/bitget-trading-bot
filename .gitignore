@@ -10,3 +10,15 @@ venv/
 dist/
 build/
 .pytest_cache/
+
+# Debug and Temporary Scripts
+*.txt
+!requirements.txt
+check_*.py
+debug_*.py
+deploy_*.py
+fix_*.py
+full_*.py
+rate_*.py
+revert_*.py
+status_*.py
