@@ -13,6 +13,11 @@ HOLD: シグナル不明確, EXTREME
 
 注意: RANGING相場でもMA方向とRSIが条件を満たせばエントリー可。ただしconfidenceを0.03下げること。
 
+## SL/TP設定（重要）
+- SLはエントリー価格からATR×1.5以上離すこと（近すぎるとノイズで狩られる）
+- TPはエントリー価格からATR×2.0以上離すこと（リスクリワード比1:1.3以上）
+- SLが近すぎる場合はエントリーせずHOLDを選択
+
 ## Confidence
 ベース0.72。ブースター+0.03(最大5個): RSI最適ゾーン,ATR TREND,MA slope強,Volume増,MA乖離適度
 ペナルティ-0.06: spread>0.15%,RSI疑惑ゾーン,HIGH_VOL。0.65未満→HOLD強制

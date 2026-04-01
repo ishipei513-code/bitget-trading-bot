@@ -33,7 +33,8 @@ class FormatGuard:
         self.config = config
 
     def check(self, decision: TradingDecision,
-              current_price: float) -> tuple[bool, str]:
+              current_price: float,
+              indicators: dict = None) -> tuple[bool, str]:
         """
         Returns: (passed, reason)
         """
@@ -45,7 +46,7 @@ class FormatGuard:
                     f"< {self.config.confidence_threshold}"
                 )
 
-        # SL/TP方向チェック（エントリー時のみ）
+        # SL/TP方向チェックと距離チェック（エントリー時のみ）
         if decision.action == "ENTER_LONG":
             if decision.stop_loss_price > 0 and decision.stop_loss_price >= current_price:
                 return False, (
@@ -57,6 +58,15 @@ class FormatGuard:
                     f"LONG TP方向エラー: TP={decision.take_profit_price} "
                     f"<= 現在価格={current_price}"
                 )
+            # ATRに基づく距離チェック
+            if indicators and "atr" in indicators:
+                atr = indicators["atr"]
+                sl_dist = current_price - decision.stop_loss_price
+                if sl_dist < atr * 1.5:
+                    return False, f"LONG SL幅狭すぎ: {sl_dist:.4f} < {atr * 1.5:.4f} (ATR×1.5)"
+                tp_dist = decision.take_profit_price - current_price
+                if tp_dist < atr * 1.5:
+                    return False, f"LONG TP幅狭すぎ: {tp_dist:.4f} < {atr * 1.5:.4f} (ATR×1.5)"
 
         if decision.action == "ENTER_SHORT":
             if decision.stop_loss_price > 0 and decision.stop_loss_price <= current_price:
@@ -69,6 +79,15 @@ class FormatGuard:
                     f"SHORT TP方向エラー: TP={decision.take_profit_price} "
                     f">= 現在価格={current_price}"
                 )
+            # ATRに基づく距離チェック
+            if indicators and "atr" in indicators:
+                atr = indicators["atr"]
+                sl_dist = decision.stop_loss_price - current_price
+                if sl_dist < atr * 1.5:
+                    return False, f"SHORT SL幅狭すぎ: {sl_dist:.4f} < {atr * 1.5:.4f} (ATR×1.5)"
+                tp_dist = current_price - decision.take_profit_price
+                if tp_dist < atr * 1.5:
+                    return False, f"SHORT TP幅狭すぎ: {tp_dist:.4f} < {atr * 1.5:.4f} (ATR×1.5)"
 
         # サイズ上限チェック（超過時は上限に自動キャップ）
         if decision.size > self.config.max_position_size:
@@ -195,7 +214,7 @@ class GuardrailChain:
             )
 
         # ① FormatGuard
-        passed, reason = self.format_guard.check(decision, current_price)
+        passed, reason = self.format_guard.check(decision, current_price, indicators)
         if not passed:
             self._block_count += 1
             logger.warning(f"❌ FormatGuard ブロック: {reason}")
