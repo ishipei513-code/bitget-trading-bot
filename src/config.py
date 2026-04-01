@@ -25,7 +25,7 @@ class BitgetConfig:
 class GeminiConfig:
     """Gemini API設定"""
     api_key: str = ""
-    model: str = "gemini-flash-lite-latest"
+    model: str = "gemini-2.0-flash-lite"  # 2026/6/1廃止予定→flash-lite-latestに切替
     temperature: float = 0.1  # 低い温度で一貫性のある判断
 
 
