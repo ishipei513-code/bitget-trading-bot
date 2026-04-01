@@ -9,31 +9,31 @@
     "bots": {
         "eth": {
             "symbol": "ETH/USDT:USDT",
-            "initial_capital": 30,
+            "initial_capital": 15,
             "max_position_size": 2.0,
             "webhook": "https://discord.com/api/webhooks/1488308580267458730/orLoAH5SFCXHv5laxx-xHx3a8kxSMFY_NVVgCqXvDuv3l7V7Y2jFQiu585u5h3z44Pmh"
         },
         "btc": {
             "symbol": "BTC/USDT:USDT",
-            "initial_capital": 30,
+            "initial_capital": 15,
             "max_position_size": 0.001,
             "webhook": "https://discord.com/api/webhooks/1488520063811190844/uujN0v14qGDKTKGSUu9lYsH5whC9k_NyrdESF9aP1abLE4dOUTvlVmPLRylCC6i6DpZ_"
         },
         "sol": {
             "symbol": "SOL/USDT:USDT",
-            "initial_capital": 30,
+            "initial_capital": 15,
             "max_position_size": 0.5,
             "webhook": "https://discord.com/api/webhooks/1488520008911945788/WZmOOQ7hSMUtjQVRIBsV5ce97KkcVVGS5wR3BwrNUWr-0rrzl35P3URR4iTpf3r2nKek"
         },
         "bnb": {
             "symbol": "BNB/USDT:USDT",
-            "initial_capital": 30,
+            "initial_capital": 15,
             "max_position_size": 0.05,
             "webhook": "https://discord.com/api/webhooks/1488168296388759564/-ZA5lpco_StaZCWCRIQJrmJqwGifvMMfHKIKqzWxhy0JJccCa7ThDJiTpfwtfFtO_HuM"
         },
         "tsla": {
             "symbol": "TSLA/USDT:USDT",
-            "initial_capital": 30,
+            "initial_capital": 15,
             "max_position_size": 1.0,
             "webhook": "https://discord.com/api/webhooks/1488522191971680260/8BYL2LGiIHgLTmG0d3rJ4snoZ7BWp1nH_TXe4hEzTFMmp_i605w97V5a0UE7KQQpBfS4"
         },
