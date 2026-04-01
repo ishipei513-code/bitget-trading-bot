@@ -291,8 +291,8 @@ class TradingBot:
                     f"| ガードレール={self.guardrail.stats}"
                 )
 
-                # 60秒間隔で次のサイクル（処理時間を差し引く）
-                wait_time = max(60 - cycle_duration, 1)
+                # 30秒間隔で次のサイクル（高速化：クリプトの急変に対応）
+                wait_time = max(30 - cycle_duration, 1)
                 await asyncio.sleep(wait_time)
 
             except Exception as e:
