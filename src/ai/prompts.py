@@ -33,7 +33,17 @@ SYSTEM_PROMPT = SYSTEM_PROMPT_TEMPLATE.format(symbol="ETH/USDT", coin="ETH")
 def build_system_prompt(symbol: str) -> str:
     """通貨に応じたシステムプロンプトを生成"""
     coin = symbol.split('/')[0]
-    return SYSTEM_PROMPT_TEMPLATE.format(symbol=symbol, coin=coin)
+    prompt = SYSTEM_PROMPT_TEMPLATE.format(symbol=symbol, coin=coin)
+    
+    # SOL専用のレンジ相場特攻ルールを追加
+    if "SOL" in symbol:
+        prompt += (
+            "\n## SOL専用特別ルール (Range Scalping)\n"
+            "SOLはレンジ相場(RANGING)でのMean Reversion（逆張り）が非常に有効な通貨です。\n"
+            "- Market StructureがRANGINGの場合、RSIが過熱圏（>65 or <35）に到達した際や、過去24時間の高値圏・安値圏に接近した場合は、積極的に逆張り（ENTER_LONG / ENTER_SHORT）を狙ってください。\n"
+            "- 普段はRANGING相場でconfidenceを下げますが、SOLの場合はこの限りではなく、明確な反発サインがあればconfidenceを0.75以上に引き上げてエントリーを許可します。"
+        )
+    return prompt
 
 DECISION_PROMPT_TEMPLATE = """以下の市場データを分析し、トレード判断をJSON形式で返してください。
 

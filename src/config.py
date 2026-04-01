@@ -106,7 +106,7 @@ def load_config() -> AppConfig:
             max_daily_loss_r=int(os.getenv("MAX_DAILY_LOSS_R", "4")),
             max_consecutive_losses=int(os.getenv("MAX_CONSECUTIVE_LOSSES", "10")),
             trend_poll_interval=int(os.getenv("TREND_POLL_INTERVAL", "300")),
-            normal_poll_interval=int(os.getenv("NORMAL_POLL_INTERVAL", "900")),
+            normal_poll_interval=int(os.getenv("NORMAL_POLL_INTERVAL", "300" if "SOL" in os.getenv("TRADING_SYMBOL", "") else "900")),
         ),
 
         notification=NotificationConfig(
