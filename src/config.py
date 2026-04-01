@@ -49,8 +49,8 @@ class TradingConfig:
     atr_period: int = 14
 
     # AI呼び出し間隔（秒）
-    trend_poll_interval: int = 300     # TREND相場: 5分
-    normal_poll_interval: int = 900    # NORMAL相場: 15分
+    trend_poll_interval: int = 600     # TREND相場: 10分
+    normal_poll_interval: int = 1200   # NORMAL相場: 20分
 
     # ポジション保持上限（分）
     max_hold_minutes: int = 120
