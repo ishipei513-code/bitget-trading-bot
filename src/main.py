@@ -234,6 +234,9 @@ class TradingBot:
                         await asyncio.sleep(60)
                         continue
 
+                    # HOLDカウンター更新
+                    self.trigger_evaluator.record_action(decision.action)
+
                     # 4. ガードレール検証
                     guard_result = self.guardrail.evaluate(
                         decision=decision,
