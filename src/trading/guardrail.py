@@ -70,13 +70,14 @@ class FormatGuard:
                     f">= 現在価格={current_price}"
                 )
 
-        # サイズ上限チェック
+        # サイズ上限チェック（超過時は上限に自動キャップ）
         if decision.size > self.config.max_position_size:
             coin = self.config.symbol.split('/')[0]
-            return False, (
-                f"サイズ上限超過: {decision.size} "
-                f"> {self.config.max_position_size} {coin}"
+            logger.warning(
+                f"サイズ自動キャップ: {decision.size} → "
+                f"{self.config.max_position_size} {coin}"
             )
+            decision.size = self.config.max_position_size
 
         # サイズ最小チェック（エントリー時）
         if decision.action in ("ENTER_LONG", "ENTER_SHORT"):
