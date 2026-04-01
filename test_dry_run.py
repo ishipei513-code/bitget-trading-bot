@@ -38,7 +38,7 @@ logging.getLogger("httpx").setLevel(logging.WARNING)
 logging.getLogger("google").setLevel(logging.WARNING)
 logger = logging.getLogger("dry_run_test")
 
-MAX_CYCLES = 2  # 2サイクルで停止
+MAX_CYCLES = 5  # 5サイクルで停止
 
 
 def main():
@@ -157,6 +157,7 @@ def main():
             state_manager.increment_ai_calls()
 
             if decision:
+                trigger_evaluator.record_action(decision.action)
                 print("  === AI判断 ===")
                 print("  アクション: {}".format(decision.action))
                 print("  Confidence: {:.2f}".format(decision.confidence))

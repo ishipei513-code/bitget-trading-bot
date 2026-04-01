@@ -14,6 +14,7 @@ Bitget AI Trading Bot - メインエントリーポイント
 """
 import asyncio
 import logging
+import logging.handlers
 import signal
 import sys
 import time
@@ -45,8 +46,8 @@ def setup_logging(level: str = "INFO", data_dir: str = "data"):
         format=log_format,
         handlers=[
             logging.StreamHandler(sys.stdout),
-            logging.FileHandler(
-                str(log_path / "bot.log"), encoding='utf-8', mode='a'
+            logging.handlers.TimedRotatingFileHandler(
+                str(log_path / "bot.log"), when='midnight', interval=1, backupCount=7, encoding='utf-8'
             ),
         ],
     )

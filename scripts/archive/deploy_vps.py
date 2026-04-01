@@ -56,7 +56,8 @@ After=network.target
 Type=simple
 User=root
 WorkingDirectory=/root/bitget-trading-bot
-ExecStart=/root/bitget-trading-bot/venv/bin/python main.py
+Environment="PYTHONPATH=/root/bitget-trading-bot"
+ExecStart=/root/bitget-trading-bot/venv/bin/python src/main.py
 Restart=always
 RestartSec=10
 EnvironmentFile=/root/bitget-trading-bot/.env

@@ -1,0 +1,6 @@
+bitget-bot: active
+bitget-bot-btc: active
+bitget-bot-sol: active
+bitget-bot-bnb: active
+bitget-bot-tsla: active
+bitget-bot-siren: active

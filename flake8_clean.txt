@@ -1,0 +1,56 @@
+﻿src/ai\gemini_client.py:71:9: F401 'google.genai' imported but unused
+src/ai\gemini_client.py:111:80: E501 line too long (107 > 79 characters)
+src/ai\prompts.py:71:1: E305 expected 2 blank lines after class or function definition, found 1
+src/ai\trigger_evaluator.py:8:1: F401 'typing.Optional' imported but unused
+src/analysis\data_collector.py:143:80: E501 line too long (118 > 79 characters)
+src/analysis\data_collector.py:150:80: E501 line too long (109 > 79 characters)
+src/analysis\technical.py:8:1: F401 'numpy as np' imported but unused
+src/analysis\technical.py:44:80: E501 line too long (82 > 79 characters)
+src/analysis\technical.py:68:80: E501 line too long (82 > 79 characters)
+src/analysis\technical.py:93:80: E501 line too long (83 > 79 characters)
+src/analysis\technical.py:142:38: E127 continuation line over-indented for visual indent
+src/analysis\technical.py:176:80: E501 line too long (89 > 79 characters)
+src/analysis\technical.py:192:80: E501 line too long (81 > 79 characters)
+src/analysis\technical.py:196:80: E501 line too long (81 > 79 characters)
+src/analysis\technical.py:209:80: E501 line too long (84 > 79 characters)
+src/analysis\technical.py:212:80: E501 line too long (81 > 79 characters)
+src/config.py:78:80: E501 line too long (80 > 79 characters)
+src/config.py:107:80: E501 line too long (82 > 79 characters)
+src/config.py:115:80: E501 line too long (81 > 79 characters)
+src/exchange\bitget_client.py:206:25: E127 continuation line over-indented for visual indent
+src/exchange\bitget_client.py:207:25: E127 continuation line over-indented for visual indent
+src/exchange\bitget_client.py:207:80: E501 line too long (81 > 79 characters)
+src/exchange\websocket_client.py:126:80: E501 line too long (85 > 79 characters)
+src/exchange\websocket_client.py:151:80: E501 line too long (83 > 79 characters)
+src/main.py:50:80: E501 line too long (103 > 79 characters)
+src/main.py:86:80: E501 line too long (86 > 79 characters)
+src/main.py:90:1: W293 blank line contains whitespace
+src/main.py:184:80: E501 line too long (81 > 79 characters)
+src/main.py:185:80: E501 line too long (97 > 79 characters)
+src/main.py:186:1: W293 blank line contains whitespace
+src/main.py:208:80: E501 line too long (86 > 79 characters)
+src/main.py:219:80: E501 line too long (80 > 79 characters)
+src/main.py:227:80: E501 line too long (88 > 79 characters)
+src/main.py:248:80: E501 line too long (80 > 79 characters)
+src/main.py:249:80: E501 line too long (90 > 79 characters)
+src/main.py:282:80: E501 line too long (88 > 79 characters)
+src/notification\notifier.py:5:1: F401 'json' imported but unused
+src/notification\notifier.py:7:1: F401 'typing.Optional' imported but unused
+src/notification\notifier.py:82:1: W293 blank line contains whitespace
+src/notification\notifier.py:93:80: E501 line too long (85 > 79 characters)
+src/notification\notifier.py:102:80: E501 line too long (83 > 79 characters)
+src/state\state_manager.py:9:1: F401 'typing.Optional' imported but unused
+src/trading\executor.py:8:1: F401 'typing.Optional' imported but unused
+src/trading\executor.py:136:80: E501 line too long (82 > 79 characters)
+src/trading\guardrail.py:50:80: E501 line too long (90 > 79 characters)
+src/trading\guardrail.py:55:80: E501 line too long (94 > 79 characters)
+src/trading\guardrail.py:62:80: E501 line too long (90 > 79 characters)
+src/trading\guardrail.py:67:80: E501 line too long (94 > 79 characters)
+src/trading\guardrail.py:110:27: F541 f-string is missing placeholders
+src/trading\guardrail.py:143:80: E501 line too long (85 > 79 characters)
+src/trading\risk_manager.py:23:34: E127 continuation line over-indented for visual indent
+src/trading\risk_manager.py:24:34: E127 continuation line over-indented for visual indent
+src/trading\risk_manager.py:25:34: E127 continuation line over-indented for visual indent
+src/trading\rule_engine.py:83:80: E501 line too long (81 > 79 characters)
+src/trading\rule_engine.py:86:80: E501 line too long (81 > 79 characters)
+src/trading\rule_engine.py:193:32: E127 continuation line over-indented for visual indent
