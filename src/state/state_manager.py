@@ -14,9 +14,13 @@ logger = logging.getLogger(__name__)
 class StateManager:
     """アプリケーション状態の管理"""
 
-    def __init__(self, data_dir: Path):
+    def __init__(self, data_dir: Path, symbol: str = "DEFAULT"):
         self.data_dir = data_dir
-        self.state_file = data_dir / "state.json"
+        
+        # シンボルごとに別々のファイルを作成（競合エラーを防ぐため）
+        safe_symbol = symbol.replace('/', '').replace(':', '')
+        self.state_file = data_dir / f"state_{safe_symbol}.json"
+        
         self.trades_dir = data_dir / "trades"
         self.events_dir = data_dir / "events"
 

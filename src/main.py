@@ -65,7 +65,7 @@ class TradingBot:
         self._cycle_count = 0
 
         # コンポーネント初期化
-        self.state_manager = StateManager(config.data_dir)
+        self.state_manager = StateManager(config.data_dir, config.trading.symbol)
         self.notifier = Notifier(config.notification)
         self.risk_manager = RiskManager(config.trading)
         self.rule_engine = RuleEngine()
