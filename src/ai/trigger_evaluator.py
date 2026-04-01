@@ -79,7 +79,7 @@ class AITriggerEvaluator:
 
         # HOLD連続3回以上なら間隔を2倍に延長（API節約）
         if self._consecutive_holds >= 3:
-            interval = min(interval * 2, 1800)  # 最大30分
+            interval = min(interval * 2, 1200)  # 最大20分
             logger.debug(
                 f"HOLD連続{self._consecutive_holds}回 - "
                 f"インターバル延長: {interval}秒"
