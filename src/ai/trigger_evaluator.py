@@ -40,6 +40,10 @@ class AITriggerEvaluator:
         Returns:
             (should_call: bool, reason: str)
         """
+        # === 初回呼び出し ===
+        if self._last_ai_call_time == 0:
+            return True, "初回AI呼び出し"
+
         now = time.time()
         elapsed = now - self._last_ai_call_time
 
@@ -88,10 +92,6 @@ class AITriggerEvaluator:
             )
             logger.info(f"AI呼び出し決定 - {reason}")
             return True, reason
-
-        # === 初回呼び出し ===
-        if self._last_ai_call_time == 0:
-            return True, "初回AI呼び出し"
 
         return False, ""
 
