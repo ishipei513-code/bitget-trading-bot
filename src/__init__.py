@@ -1,1 +1,1 @@
-# Bitget AI Trading Bot
+# Scalping Bot V2

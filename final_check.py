@@ -1,0 +1,10 @@
+import paramiko
+ssh = paramiko.SSHClient()
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+ssh.connect("160.251.137.212", username="root", password="$$Ishipei513", timeout=15)
+_, stdout, _ = ssh.exec_command("ps aux | grep python | grep -v fail2ban | grep -v grep")
+print("=== Remaining Python Processes ===")
+print("OUTPUT_START")
+print(stdout.read().decode().strip())
+print("OUTPUT_END")
+ssh.close()

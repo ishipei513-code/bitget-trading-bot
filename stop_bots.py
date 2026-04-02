@@ -1,20 +1,23 @@
 import paramiko
 
-HOSTNAME = "160.251.137.212"
-USERNAME = "root"
-PASSWORD = "$$Ishipei513"
-
 ssh = paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-ssh.connect(HOSTNAME, username=USERNAME, password=PASSWORD, timeout=10)
+ssh.connect("160.251.137.212", username="root", password="$$Ishipei513", timeout=10)
 
-print("Stopping BTC and SOL bots...")
-ssh.exec_command("systemctl stop bitget-bot-btc")
-ssh.exec_command("systemctl stop bitget-bot-sol")
+stop_bots = ["bitget-bot-btc", "bitget-bot-tsla", "bitget-bot-siren"]
 
-stdin, stdout, stderr = ssh.exec_command("systemctl is-active bitget-bot-btc || echo 'Stopped'")
-print("BTC Bot:", stdout.read().decode('utf-8').strip())
-stdin, stdout, stderr = ssh.exec_command("systemctl is-active bitget-bot-sol || echo 'Stopped'")
-print("SOL Bot:", stdout.read().decode('utf-8').strip())
+for svc in stop_bots:
+    print(f"Stopping {svc}...")
+    ssh.exec_command(f"systemctl stop {svc}")
+    ssh.exec_command(f"systemctl disable {svc}")
+
+# Verify
+import time
+time.sleep(2)
+for svc in ["bitget-bot-eth", "bitget-bot-btc", "bitget-bot-sol", "bitget-bot-bnb", "bitget-bot-tsla", "bitget-bot-siren"]:
+    _, stdout, _ = ssh.exec_command(f"systemctl is-active {svc}")
+    status = stdout.read().decode().strip()
+    print(f"  {svc}: {status}")
 
 ssh.close()
+print("Done.")
