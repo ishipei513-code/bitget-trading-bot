@@ -34,7 +34,7 @@ class AppConfig:
     atr_sl_multiplier: float = 2.0    # SL幅 = ATR × この値（1.5→2.0: ノイズ狩り防止）
 
     # --- Loop Intervals ---
-    loop_interval_no_pos: int = 30    # ポジションなし時のループ間隔(秒)
+    loop_interval_no_pos: int = 180   # ポジションなし時のループ間隔(秒) ※30→180: ノイズ回避
     loop_interval_has_pos: int = 10   # ポジション保有中のループ間隔(秒)
 
     # --- Notification ---

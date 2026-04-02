@@ -88,6 +88,21 @@ def check_entry_rules(action: str, features: dict) -> tuple[bool, str]:
             )
 
     # =======================================================
+    # EMA乖離率フィルター（騙しクロス防止）
+    # =======================================================
+    # EMA5とEMA20がギリギリ交差しただけではエントリーしない
+    # 最低0.01%以上の乖離を要求する
+    min_divergence_pct = 0.01  # 0.01%
+
+    if ema20 != 0:
+        divergence_pct = abs(ema5 - ema20) / ema20 * 100
+        if divergence_pct < min_divergence_pct:
+            return False, (
+                f"❌ エントリー却下: EMA5-EMA20乖離={divergence_pct:.4f}% "
+                f"< {min_divergence_pct}% → 騙しクロスの可能性が高い"
+            )
+
+    # =======================================================
     # MTFコンフルエンス・フィルター（共通）
     # =======================================================
     confluence_threshold = 0.3  # 0.3%以内なら「近い」と判定
