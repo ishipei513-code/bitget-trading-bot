@@ -50,7 +50,10 @@ class ExecutionController:
         })
 
         # 4モジュール
-        self.data_engine = DataEngine(self.exchange, config.symbol)
+        self.data_engine = DataEngine(
+            self.exchange, config.symbol,
+            timeframe=config.trading_timeframe
+        )
         self.ai_brain = AIBrain(config.gemini_api_key, config.gemini_model)
         self.risk_manager = RiskManager(self.exchange, config)
 
@@ -264,7 +267,6 @@ class ExecutionController:
                 self.config.symbol, limit=10
             )
             if trades:
-                # Bitgetのトレード情報からprofitフィールドを探す
                 last_trade = trades[-1]
                 info = last_trade.get("info", {})
                 pnl_from_trade = float(info.get("profit", 0) or 0)
@@ -321,59 +323,60 @@ class ExecutionController:
 
     async def _update_mtf_levels(self):
         """
-        MTF水平線を15分ごとに更新する。
-        15分足と1時間足の直近20本からドンチャンチャネル（最高値/最安値）を算出し、
-        DataEngineに4値（15m R/S + 1h R/S）を注入する。
+        MTF水平線を4時間ごとに更新する。
+        4時間足と日足の直近20本からドンチャンチャネル（最高値/最安値）を算出し、
+        DataEngineに4値（4h R/S + 1D R/S）を注入する。
+        デイトレード向けに上位足を大きく取る設計。
 
         設計:
           - 取得失敗時は前回成功した値を使い回す（try-exceptでガード）
-          - APIレートリミットを避けるため、2つのfetch_ohlcvの間に1秒のsleepを挿入
+          - APIレートリミットを避けるため2つのfetch_ohlcvの間に1秒のsleepを挿入
         """
         import pandas as pd
 
         current_time = time.time()
-        mtf_update_interval = 900  # 15分（900秒）ごとに更新
+        mtf_update_interval = 14400  # 4時間（14400秒）ごとに更新
 
         if current_time - self._last_mtf_update <= mtf_update_interval:
             return  # まだ更新不要
 
         try:
-            # 15分足の直近20本を取得
-            ohlcv_15m = await self.exchange.fetch_ohlcv(
-                self.config.symbol, "15m", limit=20
+            # 4時間足の直近20本を取得
+            ohlcv_4h = await self.exchange.fetch_ohlcv(
+                self.config.symbol, "4h", limit=20
             )
-            df_15m = pd.DataFrame(
-                ohlcv_15m,
+            df_4h = pd.DataFrame(
+                ohlcv_4h,
                 columns=["timestamp", "open", "high", "low", "close", "volume"],
             )
-            res_15m = float(df_15m["high"].max())
-            sup_15m = float(df_15m["low"].min())
+            res_4h = float(df_4h["high"].max())
+            sup_4h = float(df_4h["low"].min())
 
             # APIレートリミット回避
             await asyncio.sleep(1)
 
-            # 1時間足の直近20本を取得
-            ohlcv_1h = await self.exchange.fetch_ohlcv(
-                self.config.symbol, "1h", limit=20
+            # 日足の直近20本を取得
+            ohlcv_1d = await self.exchange.fetch_ohlcv(
+                self.config.symbol, "1d", limit=20
             )
-            df_1h = pd.DataFrame(
-                ohlcv_1h,
+            df_1d = pd.DataFrame(
+                ohlcv_1d,
                 columns=["timestamp", "open", "high", "low", "close", "volume"],
             )
-            res_1h = float(df_1h["high"].max())
-            sup_1h = float(df_1h["low"].min())
+            res_1d = float(df_1d["high"].max())
+            sup_1d = float(df_1d["low"].min())
 
-            # DataEngineへ4値を注入
+            # DataEngineへ4値を注入（フィールド名は15m/1h流用）
             self.data_engine.set_mtf_levels(
-                res_15m=res_15m,
-                sup_15m=sup_15m,
-                res_1h=res_1h,
-                sup_1h=sup_1h,
+                res_15m=res_4h,
+                sup_15m=sup_4h,
+                res_1h=res_1d,
+                sup_1h=sup_1d,
             )
             self._last_mtf_update = current_time
             logger.info(
-                f"[MTF更新] 15m[R={res_15m}, S={sup_15m}] "
-                f"1h[R={res_1h}, S={sup_1h}]"
+                f"[MTF更新] 4h[R={res_4h}, S={sup_4h}] "
+                f"1D[R={res_1d}, S={sup_1d}]"
             )
 
         except Exception as e:

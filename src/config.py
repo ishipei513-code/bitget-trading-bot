@@ -27,15 +27,16 @@ class AppConfig:
     # --- Trading ---
     symbol: str = "ETH/USDT:USDT"
     leverage: int = 5
-    risk_per_trade: float = 0.01       # 1R = 口座残高の1%
-    max_position_size: float = 0.1     # コイン枚数の絶対上限
-    confidence_threshold: float = 0.65 # この値未満のconfidenceはスキップ
-    rr_ratio: float = 2.0             # リスクリワード比 (TP = SL幅 × この値)
-    atr_sl_multiplier: float = 2.0    # SL幅 = ATR × この値（1.5→2.0: ノイズ狩り防止）
+    trading_timeframe: str = "1h"          # ローソク足の時間枚
+    risk_per_trade: float = 0.01           # 1R = 口座残高の1%
+    max_position_size: float = 0.1         # コイン枚数の絶対上限
+    confidence_threshold: float = 0.72     # この値未満のconfidenceはスキップ
+    rr_ratio: float = 2.0                 # リスクリワード比 (TP = SL幅 × この値)
+    atr_sl_multiplier: float = 2.0        # SL幅 = ATR × この値（デイトレ向け）
 
     # --- Loop Intervals ---
-    loop_interval_no_pos: int = 180   # ポジションなし時のループ間隔(秒) ※30→180: ノイズ回避
-    loop_interval_has_pos: int = 10   # ポジション保有中のループ間隔(秒)
+    loop_interval_no_pos: int = 3600  # ポジションなし時のループ間隔（秒） デイトレ向け
+    loop_interval_has_pos: int = 300  # ポジション保有中のループ間隔（秒）
 
     # --- Notification ---
     discord_webhook_url: str = ""
@@ -60,15 +61,16 @@ def load_config() -> AppConfig:
         # Trading
         symbol=os.getenv("TRADING_SYMBOL", "ETH/USDT:USDT"),
         leverage=int(os.getenv("TRADING_LEVERAGE", "5")),
+        trading_timeframe=os.getenv("TRADING_TIMEFRAME", "1h"),
         risk_per_trade=float(os.getenv("RISK_PER_TRADE", "0.01")),
         max_position_size=float(os.getenv("MAX_POSITION_SIZE", "0.1")),
-        confidence_threshold=float(os.getenv("CONFIDENCE_THRESHOLD", "0.65")),
+        confidence_threshold=float(os.getenv("CONFIDENCE_THRESHOLD", "0.72")),
         rr_ratio=float(os.getenv("RR_RATIO", "2.0")),
-        atr_sl_multiplier=float(os.getenv("ATR_SL_MULTIPLIER", "1.5")),
+        atr_sl_multiplier=float(os.getenv("ATR_SL_MULTIPLIER", "2.0")),
 
         # Loop
-        loop_interval_no_pos=int(os.getenv("LOOP_INTERVAL_NO_POS", "30")),
-        loop_interval_has_pos=int(os.getenv("LOOP_INTERVAL_HAS_POS", "10")),
+        loop_interval_no_pos=int(os.getenv("LOOP_INTERVAL_NO_POS", "3600")),
+        loop_interval_has_pos=int(os.getenv("LOOP_INTERVAL_HAS_POS", "300")),
 
         # Notification
         discord_webhook_url=os.getenv("DISCORD_WEBHOOK_URL", ""),

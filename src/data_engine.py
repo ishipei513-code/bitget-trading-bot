@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 class DataEngine:
     """市場データを取得し、テクニカル特徴量を計算するエンジン"""
 
-    def __init__(self, exchange, symbol: str, timeframe: str = "1m"):
+    def __init__(self, exchange, symbol: str, timeframe: str = "1h"):
         """
         Args:
             exchange: ccxt async_support の取引所インスタンス
