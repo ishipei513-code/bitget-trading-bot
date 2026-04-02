@@ -207,11 +207,13 @@ class ExecutionController:
                         f"{side_emoji} **エントリー** ({self.config.symbol})\n"
                         f"Action: {decision.action}\n"
                         f"Confidence: {decision.confidence:.2f}\n"
+                        f"📝 理由: {getattr(decision, 'rationale', 'なし')}\n"
                         f"Order ID: {order.get('id', 'N/A')}"
                     )
             else:
                 logger.info(
-                    f"HOLD (confidence={decision.confidence:.2f})"
+                    f"HOLD (confidence={decision.confidence:.2f}) "
+                    f"理由: {getattr(decision, 'rationale', 'なし')}"
                 )
 
             await asyncio.sleep(self.config.loop_interval_no_pos)

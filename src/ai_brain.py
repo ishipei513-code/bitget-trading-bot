@@ -25,18 +25,18 @@ logger = logging.getLogger(__name__)
 class AIDecision(BaseModel):
     """
     Geminiからの判断結果。
-    旧ボットでは size, stop_loss_price, take_profit_price, rationale 等を
-    AIに出力させていたが、V2では action と confidence の2つだけに限定する。
+    AIの思考プロセスを可視化するため、rationale（理由）を追加する。
     """
     action: Literal["ENTER_LONG", "ENTER_SHORT", "HOLD"]
     confidence: float = Field(ge=0.0, le=1.0)
+    rationale: str = Field(description="日本語での短い判断理由（なぜそのアクションとconfidenceにしたのか）")
 
 
 # ===================================================================
 # システムプロンプト（AIの役割を厳密に制限）
 # ===================================================================
 SYSTEM_PROMPT = """You are a pattern-recognition engine for USDT-M perpetual futures scalping.
-Your ONLY output is JSON: {"action": "ENTER_LONG"|"ENTER_SHORT"|"HOLD", "confidence": 0.00-1.00}
+Your ONLY output is JSON: {"action": "ENTER_LONG"|"ENTER_SHORT"|"HOLD", "confidence": 0.00-1.00, "rationale": "short explanation in Japanese"}
 
 Your job: Identify directional bias from technical features.
 You must NOT calculate lot sizes, stop-loss prices, or take-profit prices.
@@ -139,7 +139,8 @@ class AIBrain:
 
                 logger.info(
                     f"AI判断: action={decision.action} "
-                    f"confidence={decision.confidence:.2f}"
+                    f"confidence={decision.confidence:.2f} "
+                    f"理由={getattr(decision, 'rationale', 'なし')}"
                 )
                 return decision
 
