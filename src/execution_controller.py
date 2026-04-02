@@ -15,6 +15,7 @@ import asyncio
 import logging
 import signal
 import sys
+import time
 from datetime import datetime
 from typing import Optional
 
@@ -55,6 +56,9 @@ class ExecutionController:
         # ポジション遷移追跡
         self._had_position = False
         self._entry_balance: float = 0.0
+
+        # MTF水平線の最終更新時刻
+        self._last_mtf_update: float = 0
 
     async def initialize(self):
         """
@@ -137,6 +141,9 @@ class ExecutionController:
           3. ポジションなし → DataEngine→AIBrain→RiskManager
           4. await asyncio.sleep()
         """
+        # Step 0: MTF水平線の更新（1時間ごと）
+        await self._update_mtf_levels()
+
         # Step 1: ポジション確認
         positions = await self._fetch_positions()
         has_position = len(positions) > 0
@@ -276,6 +283,45 @@ class ExecutionController:
                 f.write(f"{now},{self.config.symbol},{realized_pnl:.4f}\n")
         except Exception as e:
             logger.warning(f"トレードログ書き込みエラー: {e}")
+
+    async def _update_mtf_levels(self):
+        """
+        MTF水平線を1時間ごとに更新する。
+        1時間足の直近20本からドンチャンチャネル（最高値/最安値）を算出し、
+        DataEngineに注入する。
+        """
+        import pandas as pd
+
+        current_time = time.time()
+        mtf_update_interval = 3600  # 1時間（3600秒）ごとに更新
+
+        if current_time - self._last_mtf_update > mtf_update_interval:
+            try:
+                # 1時間足の直近20本を取得
+                ohlcv_1h = await self.exchange.fetch_ohlcv(
+                    self.config.symbol, "1h", limit=20
+                )
+                df_1h = pd.DataFrame(
+                    ohlcv_1h,
+                    columns=["timestamp", "open", "high", "low", "close", "volume"],
+                )
+
+                # 直近20期間の最高値と最安値を算出（ドンチャンチャネルの概念）
+                resistance_level = float(df_1h["high"].max())
+                support_level = float(df_1h["low"].min())
+
+                # DataEngineへ注入
+                self.data_engine.set_levels(
+                    resistance=resistance_level, support=support_level
+                )
+                self._last_mtf_update = current_time
+                logger.info(
+                    f"[MTF更新] レジスタンス: {resistance_level}, "
+                    f"サポート: {support_level}"
+                )
+
+            except Exception as e:
+                logger.warning(f"MTF水平線データの取得に失敗: {e}")
 
     async def _fetch_positions(self) -> list:
         """
