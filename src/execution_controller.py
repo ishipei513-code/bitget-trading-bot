@@ -26,6 +26,7 @@ from src.config import AppConfig
 from src.data_engine import DataEngine
 from src.ai_brain import AIBrain
 from src.risk_manager import RiskManager
+from src.signal_filter import check_entry_rules
 
 logger = logging.getLogger(__name__)
 
@@ -182,7 +183,19 @@ class ExecutionController:
                 await asyncio.sleep(self.config.loop_interval_no_pos)
                 return
 
-            # Step 4: RiskManagerで発注（HOLDでなければ）
+            # Step 4: ハードルール・フィルター（AIの矛盾判断をブロック）
+            if decision.action != "HOLD":
+                passed, filter_reason = check_entry_rules(
+                    decision.action, features
+                )
+                if not passed:
+                    logger.warning(
+                        f"シグナルフィルター却下: {decision.action} → HOLD強制 "
+                        f"| {filter_reason}"
+                    )
+                    decision.action = "HOLD"
+
+            # Step 5: RiskManagerで発注（HOLDでなければ）
             if decision.action != "HOLD":
                 # 発注前に残高スナップショットを取得（PnL計算用）
                 try:
