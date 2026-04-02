@@ -58,6 +58,10 @@ class ExecutionController:
         self._had_position = False
         self._entry_balance: float = 0.0
 
+        # クールダウン（損切り後のエントリー禁止期間）
+        self._cooldown_until: float = 0.0
+        self._cooldown_seconds: int = 300  # 5分間
+
         # MTF水平線の最終更新時刻
         self._last_mtf_update: float = 0
 
@@ -183,7 +187,16 @@ class ExecutionController:
                 await asyncio.sleep(self.config.loop_interval_no_pos)
                 return
 
-            # Step 4: ハードルール・フィルター（AIの矛盾判断をブロック）
+            # Step 4: クールダウンチェック（損切り後の連続エントリー防止）
+            if decision.action != "HOLD" and time.time() < self._cooldown_until:
+                remaining = int(self._cooldown_until - time.time())
+                logger.info(
+                    f"⏳ クールダウン中: {decision.action} → HOLD強制 "
+                    f"(残り{remaining}秒)"
+                )
+                decision.action = "HOLD"
+
+            # Step 5: ハードルール・フィルター（AIの矛盾判断をブロック）
             if decision.action != "HOLD":
                 passed, filter_reason = check_entry_rules(
                     decision.action, features
@@ -285,6 +298,13 @@ class ExecutionController:
             f"実現損益: {realized_pnl:+.4f} USDT"
         )
         logger.info(log_msg)
+
+        # 損失時はクールダウンをセット（5分間エントリー禁止）
+        if realized_pnl < 0:
+            self._cooldown_until = time.time() + self._cooldown_seconds
+            logger.info(
+                f"⏳ クールダウン開始: {self._cooldown_seconds}秒間エントリー禁止"
+            )
 
         # 通知
         await self._notify(log_msg)

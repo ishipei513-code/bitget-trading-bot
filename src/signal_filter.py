@@ -34,6 +34,7 @@ def check_entry_rules(action: str, features: dict) -> tuple[bool, str]:
 
     ema5 = features.get("ema5", 0)
     ema20 = features.get("ema20", 0)
+    ema60 = features.get("ema60", 0)
     rsi = features.get("rsi", 50)
 
     # =======================================================
@@ -41,49 +42,57 @@ def check_entry_rules(action: str, features: dict) -> tuple[bool, str]:
     # =======================================================
     if action == "ENTER_LONG":
         # ルール1: EMA5 が EMA20 より下 → LONG禁止
-        #   下降トレンド中のLONGは逆行して即損切りになりやすい
         if ema5 < ema20:
             return False, (
                 f"❌ LONG却下: EMA5({ema5:.4f}) < EMA20({ema20:.4f}) "
                 f"→ 下降トレンド中のLONGは禁止"
             )
 
-        # ルール2: RSI >= 70 → LONG禁止
-        #   買われすぎ水準でのLONGは天井掴みになりやすい
+        # ルール2: RSI >= 70 → LONG禁止（買われすぎ水準）
         if rsi >= 70:
             return False, (
                 f"❌ LONG却下: RSI={rsi:.1f} >= 70 "
                 f"→ 買われすぎ水準でのLONGは禁止"
             )
 
+        # ルール3: EMA20 が EMA60 より下 → LONG禁止（大きなトレンドが下向き）
+        if ema20 < ema60:
+            return False, (
+                f"❌ LONG却下: EMA20({ema20:.4f}) < EMA60({ema60:.4f}) "
+                f"→ 中期トレンドが下向きのためLONG禁止"
+            )
+
     # =======================================================
     # ENTER_SHORT のハードルール
     # =======================================================
     if action == "ENTER_SHORT":
-        # ルール3: EMA5 が EMA20 より上 → SHORT禁止
-        #   上昇トレンド中のSHORTは逆行して即損切りになりやすい
+        # ルール4: EMA5 が EMA20 より上 → SHORT禁止
         if ema5 > ema20:
             return False, (
                 f"❌ SHORT却下: EMA5({ema5:.4f}) > EMA20({ema20:.4f}) "
                 f"→ 上昇トレンド中のSHORTは禁止"
             )
 
-        # ルール4: RSI <= 30 → SHORT禁止
-        #   売られすぎ水準でのSHORTは底値ショートになりやすい
+        # ルール5: RSI <= 30 → SHORT禁止（売られすぎ水準）
         if rsi <= 30:
             return False, (
                 f"❌ SHORT却下: RSI={rsi:.1f} <= 30 "
                 f"→ 売られすぎ水準でのSHORTは禁止"
             )
 
+        # ルール6: EMA20 が EMA60 より上 → SHORT禁止（大きなトレンドが上向き）
+        if ema20 > ema60:
+            return False, (
+                f"❌ SHORT却下: EMA20({ema20:.4f}) > EMA60({ema60:.4f}) "
+                f"→ 中期トレンドが上向きのためSHORT禁止"
+            )
+
     # =======================================================
     # MTFコンフルエンス・フィルター（共通）
     # =======================================================
-    # 15分足と1時間足のサポート/レジスタンスが近い場所での逆方向エントリーをブロック
     confluence_threshold = 0.3  # 0.3%以内なら「近い」と判定
 
     if action == "ENTER_LONG":
-        # レジスタンス（天井）のコンフルエンスチェック
         dist_res_15m = features.get("dist_to_res_15m_pct")
         dist_res_1h = features.get("dist_to_res_1h_pct")
         if (dist_res_15m is not None and dist_res_1h is not None
@@ -95,7 +104,6 @@ def check_entry_rules(action: str, features: dict) -> tuple[bool, str]:
             )
 
     if action == "ENTER_SHORT":
-        # サポート（底）のコンフルエンスチェック
         dist_sup_15m = features.get("dist_to_sup_15m_pct")
         dist_sup_1h = features.get("dist_to_sup_1h_pct")
         if (dist_sup_15m is not None and dist_sup_1h is not None

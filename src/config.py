@@ -31,7 +31,7 @@ class AppConfig:
     max_position_size: float = 0.1     # コイン枚数の絶対上限
     confidence_threshold: float = 0.65 # この値未満のconfidenceはスキップ
     rr_ratio: float = 2.0             # リスクリワード比 (TP = SL幅 × この値)
-    atr_sl_multiplier: float = 1.5    # SL幅 = ATR × この値
+    atr_sl_multiplier: float = 2.0    # SL幅 = ATR × この値（1.5→2.0: ノイズ狩り防止）
 
     # --- Loop Intervals ---
     loop_interval_no_pos: int = 30    # ポジションなし時のループ間隔(秒)
