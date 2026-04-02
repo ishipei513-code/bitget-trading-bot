@@ -286,42 +286,63 @@ class ExecutionController:
 
     async def _update_mtf_levels(self):
         """
-        MTF水平線を1時間ごとに更新する。
-        1時間足の直近20本からドンチャンチャネル（最高値/最安値）を算出し、
-        DataEngineに注入する。
+        MTF水平線を15分ごとに更新する。
+        15分足と1時間足の直近20本からドンチャンチャネル（最高値/最安値）を算出し、
+        DataEngineに4値（15m R/S + 1h R/S）を注入する。
+
+        設計:
+          - 取得失敗時は前回成功した値を使い回す（try-exceptでガード）
+          - APIレートリミットを避けるため、2つのfetch_ohlcvの間に1秒のsleepを挿入
         """
         import pandas as pd
 
         current_time = time.time()
-        mtf_update_interval = 3600  # 1時間（3600秒）ごとに更新
+        mtf_update_interval = 900  # 15分（900秒）ごとに更新
 
-        if current_time - self._last_mtf_update > mtf_update_interval:
-            try:
-                # 1時間足の直近20本を取得
-                ohlcv_1h = await self.exchange.fetch_ohlcv(
-                    self.config.symbol, "1h", limit=20
-                )
-                df_1h = pd.DataFrame(
-                    ohlcv_1h,
-                    columns=["timestamp", "open", "high", "low", "close", "volume"],
-                )
+        if current_time - self._last_mtf_update <= mtf_update_interval:
+            return  # まだ更新不要
 
-                # 直近20期間の最高値と最安値を算出（ドンチャンチャネルの概念）
-                resistance_level = float(df_1h["high"].max())
-                support_level = float(df_1h["low"].min())
+        try:
+            # 15分足の直近20本を取得
+            ohlcv_15m = await self.exchange.fetch_ohlcv(
+                self.config.symbol, "15m", limit=20
+            )
+            df_15m = pd.DataFrame(
+                ohlcv_15m,
+                columns=["timestamp", "open", "high", "low", "close", "volume"],
+            )
+            res_15m = float(df_15m["high"].max())
+            sup_15m = float(df_15m["low"].min())
 
-                # DataEngineへ注入
-                self.data_engine.set_levels(
-                    resistance=resistance_level, support=support_level
-                )
-                self._last_mtf_update = current_time
-                logger.info(
-                    f"[MTF更新] レジスタンス: {resistance_level}, "
-                    f"サポート: {support_level}"
-                )
+            # APIレートリミット回避
+            await asyncio.sleep(1)
 
-            except Exception as e:
-                logger.warning(f"MTF水平線データの取得に失敗: {e}")
+            # 1時間足の直近20本を取得
+            ohlcv_1h = await self.exchange.fetch_ohlcv(
+                self.config.symbol, "1h", limit=20
+            )
+            df_1h = pd.DataFrame(
+                ohlcv_1h,
+                columns=["timestamp", "open", "high", "low", "close", "volume"],
+            )
+            res_1h = float(df_1h["high"].max())
+            sup_1h = float(df_1h["low"].min())
+
+            # DataEngineへ4値を注入
+            self.data_engine.set_mtf_levels(
+                res_15m=res_15m,
+                sup_15m=sup_15m,
+                res_1h=res_1h,
+                sup_1h=sup_1h,
+            )
+            self._last_mtf_update = current_time
+            logger.info(
+                f"[MTF更新] 15m[R={res_15m}, S={sup_15m}] "
+                f"1h[R={res_1h}, S={sup_1h}]"
+            )
+
+        except Exception as e:
+            logger.warning(f"MTF水平線データの取得に失敗（前回値を継続使用）: {e}")
 
     async def _fetch_positions(self) -> list:
         """

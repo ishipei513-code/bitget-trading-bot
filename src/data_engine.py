@@ -39,23 +39,37 @@ class DataEngine:
         self.symbol = symbol
         self.timeframe = timeframe
 
-        # MTF水平線（外部から注入可能）
-        self._resistance: float = 0.0
-        self._support: float = 0.0
+        # MTF水平線（外部から注入可能: 15分足 + 1時間足の4値）
+        self._res_15m: float = 0.0
+        self._sup_15m: float = 0.0
+        self._res_1h: float = 0.0
+        self._sup_1h: float = 0.0
 
-    def set_levels(self, resistance: float = 0.0, support: float = 0.0):
+    def set_mtf_levels(
+        self,
+        res_15m: float = 0.0,
+        sup_15m: float = 0.0,
+        res_1h: float = 0.0,
+        sup_1h: float = 0.0,
+    ):
         """
-        レジスタンス/サポートの水平線を外部から注入する。
-        例: 上位足(15m, 1h)で検出した水平線をここに設定する。
+        15分足と1時間足のレジスタンス/サポートを外部から注入する。
+        ドンチャンチャネル（直近20本の最高値/最安値）で算出された値を想定。
 
         Args:
-            resistance: レジスタンス価格（0なら未設定扱い）
-            support: サポート価格（0なら未設定扱い）
+            res_15m: 15分足レジスタンス（0なら未設定）
+            sup_15m: 15分足サポート（0なら未設定）
+            res_1h: 1時間足レジスタンス（0なら未設定）
+            sup_1h: 1時間足サポート（0なら未設定）
         """
-        self._resistance = resistance
-        self._support = support
-        if resistance > 0 or support > 0:
-            logger.info(f"MTF水平線を設定: R={resistance}, S={support}")
+        self._res_15m = res_15m
+        self._sup_15m = sup_15m
+        self._res_1h = res_1h
+        self._sup_1h = sup_1h
+        logger.info(
+            f"MTF水平線を設定: 15m[R={res_15m}, S={sup_15m}] "
+            f"1h[R={res_1h}, S={sup_1h}]"
+        )
 
     async def update(self) -> Optional[dict]:
         """
@@ -127,14 +141,22 @@ class DataEngine:
                 "atr": round(float(atr), 6),
             }
 
-            # 7. MTF水平線までの距離(%)
-            if self._resistance > 0:
-                features["dist_to_resistance_pct"] = round(
-                    (self._resistance - price) / price * 100, 4
+            # 7. MTF水平線までの距離(%): 15分足 + 1時間足
+            if self._res_15m > 0:
+                features["dist_to_res_15m_pct"] = round(
+                    (self._res_15m - price) / price * 100, 4
                 )
-            if self._support > 0:
-                features["dist_to_support_pct"] = round(
-                    (price - self._support) / price * 100, 4
+            if self._sup_15m > 0:
+                features["dist_to_sup_15m_pct"] = round(
+                    (price - self._sup_15m) / price * 100, 4
+                )
+            if self._res_1h > 0:
+                features["dist_to_res_1h_pct"] = round(
+                    (self._res_1h - price) / price * 100, 4
+                )
+            if self._sup_1h > 0:
+                features["dist_to_sup_1h_pct"] = round(
+                    (price - self._sup_1h) / price * 100, 4
                 )
 
             logger.info(
@@ -181,15 +203,33 @@ class DataEngine:
             f"ATR(14): {features['atr']:.6f}",
         ]
 
-        # MTF水平線(設定されている場合のみ)
-        if "dist_to_resistance_pct" in features:
-            lines.append(
-                f"Distance to Resistance: {features['dist_to_resistance_pct']:+.4f}%"
-            )
-        if "dist_to_support_pct" in features:
-            lines.append(
-                f"Distance to Support: {features['dist_to_support_pct']:+.4f}%"
-            )
+        # MTF水平線(15分足 + 1時間足)
+        has_mtf = False
+        for key in ["dist_to_res_15m_pct", "dist_to_sup_15m_pct",
+                     "dist_to_res_1h_pct", "dist_to_sup_1h_pct"]:
+            if key in features:
+                has_mtf = True
+                break
+
+        if has_mtf:
+            lines.append("")
+            lines.append("--- MTF Support/Resistance ---")
+            if "dist_to_res_15m_pct" in features:
+                lines.append(
+                    f"15m Resistance Distance: {features['dist_to_res_15m_pct']:+.4f}%"
+                )
+            if "dist_to_sup_15m_pct" in features:
+                lines.append(
+                    f"15m Support Distance: {features['dist_to_sup_15m_pct']:+.4f}%"
+                )
+            if "dist_to_res_1h_pct" in features:
+                lines.append(
+                    f"1h Resistance Distance: {features['dist_to_res_1h_pct']:+.4f}%"
+                )
+            if "dist_to_sup_1h_pct" in features:
+                lines.append(
+                    f"1h Support Distance: {features['dist_to_sup_1h_pct']:+.4f}%"
+                )
 
         lines.append("")
         lines.append("Analyze these features and respond with JSON only.")

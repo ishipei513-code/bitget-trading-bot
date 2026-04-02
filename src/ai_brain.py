@@ -56,7 +56,16 @@ Key Feature Weights (in priority order):
 1. EMA alignment and slope direction (primary trend signal)
 2. RSI level and RSI delta (momentum confirmation)
 3. EMA divergence rates (trend strength measurement)
-4. Distance to support/resistance levels (if provided)
+4. Distance to support/resistance levels (see MTF rules below)
+
+MTF Support/Resistance Rules (CRITICAL):
+- Evaluate the distance to resistance/support on BOTH 15-minute and 1-hour timeframes.
+- If the 15m and 1h resistance (or support) levels are close to each other (confluence zone),
+  the probability of price reversal at that zone is EXTREMELY HIGH.
+- When price is near a confluence zone (within 0.3% of both 15m and 1h levels):
+  * Do NOT enter LONG near confluent resistance. Choose HOLD instead.
+  * Do NOT enter SHORT near confluent support. Choose HOLD instead.
+- A single-timeframe level (15m only or 1h only) is a weaker barrier and may be broken.
 """
 
 
